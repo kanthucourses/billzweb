@@ -1,0 +1,74 @@
+body {
+    background: #f7f7f7;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555555;
+}
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 24px;
+    color: #555;
+    background: #fff;
+}
+.invoice-box .logo {
+    height: 100px;
+    width: 100px;
+    background: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 100px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+}
+.invoice-title {
+    color: #333;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: bold;
+}
+.invoice-info {
+    margin-bottom: 20px;
+}
+.invoice-info .title {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+.invoice-info .value {
+    font-size: 15px;
+}
+.terms {
+    border-top: 2px solid #aaa;
+    padding-top: 10px;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #333;
+}
+.signature {
+    font-family: "Brush Script MT", cursive; /* Fallback to mimic signature */
+    font-size: 24px;
+    text-align: right;
+}
+.table thead th {
+    border-top: none;
+    border-bottom: 2px solid #d05c5c;
+    color: #333;
+    background-color: #f2f2f2;
+}
+.total-table td {
+    border-top: none;
+}
+.total-table .label {
+    text-align: right;
+}
+.total-table .value {
+    font-size: 24px;
+    font-weight: bold;
+}

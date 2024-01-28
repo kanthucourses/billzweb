@@ -1,0 +1,171 @@
+<header class="header-section">
+    <div class="header-content">
+        <p class="header-value">Organization</p>
+    </div>
+</header>
+
+<section id="inputContent">
+    <div class="container px-1 py-5">
+        <form id="formAwesome" [formGroup]="organizationForm">
+            <div class="form-group row">
+                <div class="col-md-6 col-sm-3">
+                    <div class="row mb-3">
+                        <label for="organizationID" class="col-sm-2 col-form-label custom-label">Organization ID<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="organizationID" placeholder="organization ID"
+                                formControlName="organizationID" (change)="appendOrganizationIDName()">
+                            <div
+                                *ngIf="organizationForm.get('organizationID').hasError('required') && (organizationForm.get('organizationID').dirty || organizationForm.get('organizationID').touched)">
+                                <span class="text-danger">Organization ID is required.</span>
+                            </div>
+                        </div>
+
+                        <label for="organizationName" class="col-sm-2 col-form-label custom-label">Organization Name<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="organizationName"
+                                placeholder="Organization Name" formControlName="organizationName"
+                                (change)="appendOrganizationIDName()">
+                            <div
+                                *ngIf="organizationForm.get('organizationName').hasError('required') && (organizationForm.get('organizationName').dirty || organizationForm.get('organizationName').touched)">
+                                <span class="text-danger">Service Name is required.</span>
+                            </div>
+                        </div>
+                        <label for="organizationIDName" class="col-sm-2 col-form-label custom-label">organization IDName</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="organizationIDName"
+                                placeholder="Organization IDName" formControlName="organizationIDName" readonly>
+                        </div>
+                        <label for="operationalUnit" class="col-sm-2 col-form-label custom-label">Operational Unit</label>
+                        <div class="col-sm-10">
+                            <select id="operationalUnit" class="form-select" formControlName="operationalUnit"
+                                placeholder="Operational Unit">
+                                <!-- <option selected [ngValue]=null>select</option> -->
+                                <option *ngFor="let opUnitValue of operationalUnitValues" [ngValue]="opUnitValue">{{
+                                    opUnitValue }}</option>
+                            </select>
+                        </div>
+                        <label for="status" class="col-sm-2 col-form-label custom-label">Status</label>
+                        <div class="col-sm-10">
+                            <select id="status" class="form-select" formControlName="status" placeholder="Status">
+                                <!-- <option selected [ngValue]=null>select</option> -->
+                                <option *ngFor="let statusValue of statusValues" [ngValue]="statusValue">{{ statusValue
+                                    }}</option>
+                            </select>
+                        </div>
+                        <label for="logo" class="col-sm-2 col-form-label custom-label">Logo</label>
+                        <div class="col-sm-10">
+                            <input type="file" (change)="selectFile($event)" #fileInput/>
+                            <span *ngIf="fileNameResp"> 
+                                <a (click)="removeImage(fileNameResp)">
+                                  <i class="bi bi-x"></i>
+                                 </a>
+                              </span>
+                              <!-- <span *ngIf="fileInput.nativeElement.value">
+                                {{fileInput.nativeElement.value.split('\\').pop() }} </span> -->
+                            <!-- <span><button id="btnClear" type="button" class="btn btn-danger btn-block ms-3"
+                            (click)="removeImage(fileNameResp)">remove</button></span> -->
+                        </div>
+
+                        <div *ngIf="imageUrl">
+                            <!-- <p>{{imageUrl | json}}</p> -->
+                            <img 
+                            height="60"
+                            width="120"
+                            alt="Logo"
+                            loading="lazy"
+                            [src]="'data:image/jpg;base64,' + imageUrl" 
+                            class="preview">
+                          </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-3">
+                    <div class="row mb-3">
+                        <label for="address" class="col-sm-2 col-form-label custom-label">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="address" placeholder="Address"
+                                formControlName="address">
+                        </div>
+                        <label for="city" class="col-sm-2 col-form-label custom-label">City</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="city" placeholder="City" formControlName="city">
+                        </div>
+                        <label for="state" class="col-sm-2 col-form-label custom-label">State</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="state" placeholder="State"
+                                formControlName="state">
+                        </div>
+                        <label for="country" class="col-sm-2 col-form-label custom-label">Country</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="country" placeholder="Country"
+                                formControlName="country">
+                        </div>
+                        <label for="pincode" class="col-sm-2 col-form-label custom-label">Pincode</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pincode" placeholder="Pincode"
+                                formControlName="pincode">
+                        </div>
+                        <div class="form-group row" formGroupName="parentOrganizationInfo">
+                            <label for="organizationIDName" class="col-sm-2 col-form-label custom-label">Parent Organization</label>
+                            <div class="col-sm-10">
+                                <!-- <input type="text" formControlName="organizationIDName" class="form-control"
+                                    id="organizationIDName" placeholder="Parent Organization IDName"> -->
+                                <ng-select class="parentOrgSearch" [placeholder]="'Parent Organization IDName'"
+                                    [searchable]="true" formControlName="organizationIDName">
+                                    <ng-option *ngFor="let org of organizations"
+                                        [value]="org.organizationIDName">{{org.organizationIDName}}</ng-option>
+                                </ng-select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 d-flex">
+                    <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
+                        [disabled]="!organizationForm.valid" (click)="saveOrEdit()">save</button>
+                    <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3"
+                        (click)="clear()">clear</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+
+<section class="table-section">
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Organization ID</th>
+                    <th>Organization Name</th>
+                    <th>Operational Unit</th>
+                    <th>Parent Organization</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let organization of organizations; let i= index ">
+                    <td>{{organization.organizationID}}</td>
+                    <td>{{organization.organizationName}}</td>
+                    <td>{{organization.operationalUnit}}</td>
+                    <td>{{organization.parentOrganizationInfo?.organizationIDName}}</td>
+                    <td>
+                        <span>
+                            <a><i class="bi bi-pencil-square me-4" (click)="edit(organization)"></i> </a>
+                            <a><i class="bi bi-trash" (click)="deleteOrganization(organization)"></i></a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+<app-deletemodelpopup [getInfo]="organization" (deleteResponse)="getDeleteConfirmation($event)"></app-deletemodelpopup>

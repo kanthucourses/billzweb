@@ -1,0 +1,107 @@
+<header class="header-section">
+    <div class="header-content">
+        <p class="header-value">Tax</p>
+    </div>
+</header>
+
+<section id="inputContent">
+    <div class="container px-1 py-5">
+        <form id="formAwesome" [formGroup]="taxMasterForm">
+            <div class="form-group row">
+                <div class="col-md-6 col-sm-3">
+                    <div class="row mb-3">
+                        <label for="taxName" class="col-sm-2 col-form-label custom-label">Tax Name<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="taxName" placeholder="Tax Name"
+                                formControlName="taxName">
+                            <div
+                                *ngIf="taxMasterForm.get('taxName').hasError('required') && (taxMasterForm.get('taxName').dirty || taxMasterForm.get('taxName').touched)">
+                                <span class="text-danger">Tax Name is required.</span>
+                            </div>
+                        </div>
+
+                        <label for="taxPercentage" class="col-sm-2 col-form-label custom-label">Tax Percentage<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="taxPercentage"
+                                placeholder="Tax Percentage" formControlName="taxPercentage">
+                            <div
+                                *ngIf="taxMasterForm.get('taxPercentage').hasError('required') && (taxMasterForm.get('taxPercentage').dirty || taxMasterForm.get('taxPercentage').touched)">
+                                <span class="text-danger">Tax Percentage is required.</span>
+                            </div>
+                        </div>
+                       
+                        <label for="status" class="col-sm-2 col-form-label custom-label">Status</label>
+                        <div class="col-sm-10">
+                            <select id="status" class="form-select" formControlName="status" placeholder="Status">
+                                <!-- <option selected [ngValue]=null>select</option> -->
+                                <option *ngFor="let statusValue of statusValues" [ngValue]="statusValue">{{ statusValue
+                                    }}</option>
+                            </select>
+                        </div>
+                       
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-3">
+                    <div class="row mb-3">
+                        <label for="country" class="col-sm-2 col-form-label custom-label">Country</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="country" placeholder="Country"
+                                formControlName="country">
+                        </div>
+                        <label for="state" class="col-sm-2 col-form-label custom-label">State</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="state" placeholder="State"
+                                formControlName="state">
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+                <div class="col-12 d-flex">
+                    <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
+                        [disabled]="!taxMasterForm.valid" (click)="saveOrEdit()">save</button>
+                    <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3"
+                        (click)="clear()">clear</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+
+<section class="table-section">
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tax Name</th>
+                    <th>Tax Percentage</th>
+                    <th>Country</th>
+                    <th>Status</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let taxMaster of taxMasters; let i= index ">
+                    <td>{{taxMaster.taxName}}</td>
+                    <td>{{taxMaster.taxPercentage}}</td>
+                    <td>{{taxMaster.country}}</td>
+                    <td>{{taxMaster.state}}</td>
+                    <td>
+                        <span>
+                            <a><i class="bi bi-pencil-square me-4" (click)="edit(taxMaster)"></i></a>
+                            <a> <i class="bi bi-trash" (click)="deleteTaxMaster(taxMaster)"></i></a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+<app-deletemodelpopup [getInfo]="taxMaster" (deleteResponse)="getDeleteConfirmation($event)"></app-deletemodelpopup>

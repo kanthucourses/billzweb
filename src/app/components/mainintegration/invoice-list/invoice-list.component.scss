@@ -1,0 +1,16 @@
+app-invoice-pdf{
+    display: none;
+}
+a { 
+    cursor: pointer;
+ }
+ .custom-label{
+    font-size: 14px;
+  }
+  th{
+    font-size: 14px;
+  }
+  a.disabled {
+    pointer-events: none; /* Disable mouse events */
+    color: #ccc; /* Change the color to indicate it's disabled */
+}

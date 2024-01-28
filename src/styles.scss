@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* @import "~ngx-smart-modal/styles/ngx-smart-modal"; */
+      //  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            //   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+
+
+.form-group input::placeholder {
+    opacity: 0.5;
+    font-size: 15px;
+}
+.form-group textarea::placeholder {
+    opacity: 0.5;
+    font-size: 15px;
+}
+input::placeholder {
+    opacity: 0.5;
+    font-size: 15px;
+}
+td input::placeholder {
+    opacity: 0.5;
+    font-size: 15px;
+}
+.parentOrgSearch .ng-placeholder {
+    opacity: 0.5;
+    font-size: 15px;
+}
+.taxSearch .ng-placeholder {
+    opacity: 0.5;
+    font-size: 15px;
+}
+// .tax-button::placeholder {
+//     opacity: 0.5;
+//     font-size: 15px;
+// }
+
+.delete-modal-custom{
+    width: 400px !important;
+    /* max-width: none !important; */
+    /* background-color: black !important; */
+   }
+
+//    ng select
+
+.ng-select.custom {
+    display: flex;
+  
+    .ng-select-container {
+      min-width: 100px;
+      width: 150px;
+    }
+  
+    .ng-dropdown-panel {
+      width: auto;
+    }
+  }
+
+  :host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    display: inline-block;
+    border: 1px solid #adadad;
+    width: 100%;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.1;
+    text-align: left;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border-radius: 4px;
+}

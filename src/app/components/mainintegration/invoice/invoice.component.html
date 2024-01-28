@@ -1,0 +1,395 @@
+<header class="header-section">
+    <div class="header-content">
+        <p class="header-value">Invoice</p>
+    </div>
+</header>
+<div class="container" [formGroup]="invoiceForm">
+    <form id="formAwesome" [formGroup]="invoiceForm">
+        <section id="inputContent">
+            <div class="container">
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-3">
+                        <div class="row mb-3">
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="customerName" class="col-sm-2 col-form-label custom-label">Customer
+                                    Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="customerName" class="form-control"
+                                        id="customerName" placeholder="customer name">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="emailID" class="col-sm-2 col-form-label custom-label">Email ID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="emailID" class="form-control" id="emailID"
+                                        placeholder="email id">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="phoneNumber" class="col-sm-2 col-form-label custom-label">Phone
+                                    Number</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="phoneNumber" class="form-control"
+                                        id="phoneNumber" placeholder="phone number">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="alternativePhoneNumber"
+                                    class="col-sm-2 col-form-label custom-label">Alternative Phone
+                                    No</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="alternativePhoneNumber" class="form-control"
+                                        id="alternativePhoneNumber" placeholder="alternative phone number">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-4 col-sm-3">
+
+                        <div class="row mb-3">
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="address" class="col-sm-2 col-form-label custom-label">Address</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="address" class="form-control" id="address"
+                                        placeholder="address">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="city" class="col-sm-2 col-form-label custom-label">City</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="city" class="form-control" id="city"
+                                        placeholder="city">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="state" class="col-sm-2 col-form-label custom-label">State</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="state" class="form-control" id="state"
+                                        placeholder="state">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="country" class="col-sm-2 col-form-label custom-label">Country</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="country" class="form-control" id="country"
+                                        placeholder="country">
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="pincode" class="col-sm-2 col-form-label custom-label">Pincode</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="pincode" class="form-control" id="pincode"
+                                        placeholder="pincode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-3">
+                        <div class="row mb-3">
+                            <div class="form-group row">
+                                <label for="invoiceDate" class="col-sm-2 col-form-label custom-label">Invoice
+                                    Date {{isReadOnly}}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" [attr.disabled]="isReadOnly ? true : null" id="invoiceDate" placeholder="invoice date"
+                                        bsDatepicker [(ngModel)]="invoiceDate" [ngModelOptions]="{standalone:true}"
+                                        [bsConfig]="datePickerConfig" (ngModelChange)="changeInvoiceDate()" autocomplete="off">
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row">
+                                <label for="status" class="col-sm-2 col-form-label custom-label">Status</label>
+                                <div class="col-sm-10">
+                                    <select id="status" class="form-select" formControlName="invoiceStatus" placeholder="invoice Status">
+                                        <option value="Created">Created</option>
+                                        <option value="Confirmed">Confirmed</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="form-group row">
+                                <label for="invoiceStatus" class="col-sm-2 col-form-label custom-label">Invoice
+                                    Status</label>
+                                <div class="col-sm-10">
+                                    <select id="invoiceStatus" class="form-select" [attr.disabled]="isReadOnly ? true : null" formControlName="invoiceStatus" placeholder="invoice status">
+                                        <option value=null>select</option>
+                                        <option value="Created">Created</option>
+                                        <option value="Confirmed">Confirmed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="paymentMethod" class="col-sm-2 col-form-label custom-label">Payment
+                                    Method</label>
+                                <div class="col-sm-10">
+                                    <select id="paymentMethod" class="form-select" [attr.disabled]="isReadOnly ? true : null" formControlName="paymentMethod" placeholder="payment method">
+                                        <option value=null>select</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="UPI">UPI</option>
+                                        <option value="Online Payment">Online Payment</option>
+                                        <option value="Cash And Online">Cash And Online</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="paymentStatus" class="col-sm-2 col-form-label custom-label">Payment
+                                    Status</label>
+                                <div class="col-sm-10">
+                                    <select id="paymentStatus" class="form-select" formControlName="paymentStatus" placeholder="payment status">
+                                        <option value=null>select</option>
+                                        <option value="Paid">Paid</option>
+                                        <option value="Due">Due</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="form-group row">
+            <div class="col-2 mt-5">
+                <button id="btnSave" type="button" class="btn btn-info btn-block me-auto" 
+                [attr.disabled]="isReadOnly ? true : null" (click)="addControl()">add service</button>
+            </div>
+            <div class="col-2">
+                <!-- dummy -->
+            </div>
+            <div class="col-2">
+                <label for="totalGrossAmount" class="col-sm-2 col-form-label custom-label">Gross Amount</label>
+                <div>
+                    <input type="number" class="form-control " formControlName="totalGrossAmount" readonly
+                        id="totalGrossAmount" placeholder="gross amount">
+                </div>
+            </div>
+            <div class="col-2">
+                <label for="totalTaxAmount" class="col-sm-2 col-form-label mt-2 custom-label">Tax Amount
+                    <div class="col-sm-10">
+                        <button class="btn btn-light tax-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <i></i> <span> {{ totalTaxAmount }}</span>
+                        </button>
+                    </div>
+                </label>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <p *ngFor="let taxDetails of finalTaxDetailsList; let i=index">
+                            tax: {{taxDetails.taxName}} @ {{taxDetails.taxPercentage}}%<br>
+                            amount: {{taxDetails.taxAmount}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <label for="totalDiscountAmount" class="col-sm-2 col-form-label custom-label">Discount Amount</label>
+                <div>
+                    <input type="number" class="form-control " formControlName="totalDiscountAmount" readonly
+                        id="totalDiscountAmount" placeholder="discount amount">
+                </div>
+            </div>
+            <div class="col-2">
+                <label for="totalNetAmount" class="col-sm-2 col-form-label custom-label">Net Amount</label>
+                <div>
+                    <input type="number" class="form-control " formControlName="totalNetAmount" readonly
+                        id="totalNetAmount" placeholder="net amount">
+                </div>
+            </div>
+
+        </div>
+
+        <section id="inlineTable">
+            <div class="pt-2">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" name="isCheckAll" />
+                            </th>
+                            <th class="serviceHeader" scope="col">Service IDName {{isReadOnly}}</th>
+                            <th scope="col">Service Name</th>
+                            <th scope="col">Service Cost</th>
+                            <th class="qty" scope="col">Quantity</th>
+                            <th scope="col">Gross Amount</th>
+                            <th class="taxHeader" scope="col">tax</th>
+                            <th scope="col" >Discount(%)</th>
+                            <th scope="col">Net Amount</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let invoiceLine of invoiceLinesHelperArr; let i=index"
+                            >
+                            <td scope="row" class="align-middle">
+                                <input type="checkbox" />
+                            </td>
+                            
+                            <td class="serviceSearch">
+                                <ng-select class="auto-grow custom"  
+                                [disabled]="isReadOnly"
+                                 placeholder="select service" [searchable]="true"
+                                [items]="serviceMasters" 
+                                bindLabel="serviceIDName"
+                                bindValue="serviceIDName"
+                                [(ngModel)]="invoiceLine.serviceIDName"
+                                [ngModelOptions]="{standalone:true}"
+                                (ngModelChange)="onServiceSelect($event,i);">
+                                </ng-select>
+                                <!-- <input type="text" class="form-control" formControlName="serviceIDName"
+                                    placeholder="service idname"> -->
+                            </td>
+                            <td>
+                                <input type="text" [readonly]="isReadOnly" class="form-control" 
+                                    placeholder="service name"  [(ngModel)]="invoiceLine.serviceName"
+                                    [ngModelOptions]="{standalone:true}">
+                            </td>
+                            <td>
+                                <input type="number" [readonly]="isReadOnly" class="form-control" 
+                                    placeholder="service cost" [(ngModel)]="invoiceLine.serviceCost"
+                                    [ngModelOptions]="{standalone:true}"
+                                    (focusout) = "amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                   >
+                            </td>
+                            <td class="qty">
+                                <input type="number" [readonly]="isReadOnly" class="form-control" 
+                                    placeholder="quantity" [(ngModel)]="invoiceLine.quantity"
+                                    [ngModelOptions]="{standalone:true}"
+                                    (focusout) = "amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                   >
+                            </td>
+                            <td>
+                                <input type="number" [readonly]="isReadOnly" class="form-control"  readonly
+                                    placeholder="gross" [(ngModel)]="invoiceLine.grossAmount"
+                                    [ngModelOptions]="{standalone:true}">
+                            </td>
+                            <td class="taxSearch" >
+                                <ng-multiselect-dropdown 
+                                [disabled]="isReadOnly" 
+                                [placeholder]="'tax'" 
+                                [settings]="dropdownSettings"
+                                [data]="invoiceLine.taxMasterInfosDropdownData" 
+                                [(ngModel)]="invoiceLine.taxMasterInfos"
+                                [ngModelOptions]="{standalone:true}"
+                                (onSelect)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                (onDeSelect)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                 >
+                                </ng-multiselect-dropdown>
+                                <!-- (onDropDownClose) = "onTaxChange($event, invoiceLine, i)" -->
+                                <!-- formControlName="invoiceForm.get('invoiceLines')['controls'][i]['controls']['taxDetailsList'].value.taxNamePercentage" -->
+                                <!-- [formControl]="$any(getTaxDetailsList(i))" -->
+                            </td>
+                            <!-- *ngIf="invoiceLine.discountType !== null && invoiceLine.discountType !== undefined && invoiceLine.discountType==='Percentage'" -->
+                            <td>
+                                <input type="number" [readonly]="isReadOnly" class="form-control"
+                                    placeholder="discountPercentage" [(ngModel)]="invoiceLine.discountPercentage"
+                                    [ngModelOptions]="{standalone:true}"
+                                    (focusout) = "amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                   >
+                            </td>
+                            
+                            <td>
+                                <input type="number" [readonly]="isReadOnly" class="form-control"  readonly
+                                    placeholder="netAmount" [(ngModel)]="invoiceLine.netAmount"
+                                    [ngModelOptions]="{standalone:true}">
+                            </td>
+                            <td>
+                                <button type="button" class="btn  btn-block remove-button"
+                                [attr.disabled]="isReadOnly ? true : null" (click)="removeInvoiceLine(i)"> X
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div class="col-12 d-flex">
+            <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
+            [attr.disabled]="isUpdateBtnReadOnly ? true : null" (click)="saveOrEdit()">{{saveEdit}}</button>
+            <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3" 
+            [attr.disabled]="isReadOnly ? true : null" (click)="clear()">clear</button>
+        </div>
+    </form>
+</div>
+
+<!-- summarytable -->
+<div class="container mt-5">
+    <section class="table-section">
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col">Invoice ID</th>
+                        <th class="col">Customer Name</th>
+                        <th class="col">Phone Number</th>
+                        <th class="col">Email ID</th>
+                        <th class="col">Address</th>
+                        <th class="col">City</th>
+                        <th class="col">Invoice Status</th>
+                        <th class="col">Payment Status</th>
+                        <th class="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoice of invoices; let i= index ">
+                        <td>{{invoice?.invoiceID}}</td>
+                        <td>{{invoice.customerDetails?.customerName}}</td>
+                        <td>{{invoice.customerDetails?.phoneNumber}}</td>
+                        <td>{{invoice.customerDetails?.emailID}}</td>
+                        <td>{{invoice.customerDetails?.address}}</td>
+                        <td>{{invoice.customerDetails?.city}}</td>
+                        <td>{{invoice?.invoiceStatus}}</td>
+                        <td>{{invoice?.paymentStatus}}</td>
+
+                        <td>
+                            <span>
+                                <a><i class="bi bi-pencil-square me-4" (click)="edit(invoice)"></i></a>
+                                <a><i class="bi bi-trash" (click)="deleteInvoice(invoice,null)"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</div>
+
+<div class="container mt-2">
+    <section class="table-section">
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col">Invoice ID</th>
+                        <th class="col">Line Id</th>
+                        <th class="col">Service IDName</th>
+                        <th class="col">Service Cost</th>
+                        <th class="col">Quantity</th>
+                        <th class="col">Net Amount</th>
+                        <th class="col-1">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoiceLine of invoiceLinesHelperList; let i= index ">
+                        <td>{{invoiceLine?.invoiceID}}</td>
+                        <td>{{invoiceLine?.invoiceLineID}}</td>
+                        <td>{{invoiceLine?.serviceIDName}}</td>
+                        <td>{{invoiceLine?.serviceCost}}</td>
+                        <td>{{invoiceLine?.quantity}}</td>
+                        <td>{{invoiceLine?.netAmount}}</td>
+                        <td>
+                            <span>
+                                <a [class.disabled]="!isDelete"><i class="bi bi-trash ps-4" (click)="deleteInvoice(null,invoiceLine)"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</div>
+
+<app-deletemodelpopup [getInfo]="invoice" (deleteResponse)="getDeleteConfirmation($event)"></app-deletemodelpopup>

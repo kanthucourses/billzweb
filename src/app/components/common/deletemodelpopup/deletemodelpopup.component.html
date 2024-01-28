@@ -1,0 +1,10 @@
+<ngx-smart-modal customClass="delete-modal-custom" #deletePopup [identifier]="'deletePopup'">
+    <div class="my-4">
+        <h6>Do you want to delete?</h6>
+    </div>
+    <div class="text-center ">
+        <button class="btn btn-info btn-block" (click)="[delete(), deletePopup.close()]"> Yes
+        </button>
+        <button class="btn btn-info btn-block ms-3" (click)="[undo(), deletePopup.close()]"> No </button>
+    </div>
+</ngx-smart-modal>

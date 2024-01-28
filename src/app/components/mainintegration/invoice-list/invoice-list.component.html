@@ -1,0 +1,92 @@
+<!-- summarytable -->
+
+<div class="container mt-5" id="invoice" #invoice>
+    <section class="table-section">
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col-1">Invoice ID</th>
+                        <th class="col-1">Customer Name</th>
+                        <th class="col-1">Phone Number</th>
+                        <th class="col-1">Email ID</th>
+                        <th class="col-2">Address</th>
+                        <th class="col-1">City</th>
+                        <th class="col-1">Invoice Status</th>
+                        <th class="col-1">Payment Status</th>
+                        <th class="col-1">Action</th>
+                        <th class="col-1">Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoice of invoices; let i= index ">
+                        <td>{{invoice?.invoiceID}}</td>
+                        <td>{{invoice.customerDetails?.customerName}}</td>
+                        <td>{{invoice.customerDetails?.phoneNumber}}</td>
+                        <td>{{invoice.customerDetails?.emailID}}</td>
+                        <td>{{invoice.customerDetails?.address}}</td>
+                        <td>{{invoice.customerDetails?.city}}</td>
+                        <td>{{invoice?.invoiceStatus}}</td>
+                        <td>{{invoice?.paymentStatus}}</td>
+                        <td>
+                            <span>
+                                <a (click)="editInvoice(invoice._id)">
+                                    <i class="bi bi-pencil-square me-4"></i>
+                                </a>                       
+                                <a [class.disabled]="invoice.invoiceStatus === 'Confirmed'"><i class="bi bi-trash"></i></a>
+                            </span>
+                        </td>
+                        <td><a (click)="invoicePdfView(invoice._id)"><i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i>PDF</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</div>
+
+<div class="container mt-2">
+    <section class="table-section">
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col">Invoice ID</th>
+                        <th class="col">Line Id</th>
+                        <th class="col">Service IDName</th>
+                        <th class="col">Service Cost</th>
+                        <th class="col">Quantity</th>
+                        <th class="col">Amount</th>
+                        <th class="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoiceLine of invoiceLinesHelperList; let i= index ">
+                        <td>{{invoiceLine?.invoiceID}}</td>
+                        <td>{{invoiceLine?.invoiceLineID}}</td>
+                        <td>{{invoiceLine?.serviceIDName}}</td>
+                        <td>{{invoiceLine?.serviceCost}}</td>
+                        <td>{{invoiceLine?.quantity}}</td>
+                        <td>{{invoiceLine?.amount}}</td>
+                        <td>
+                            <span>
+                                <a><i class="bi bi-pencil-square me-4"></i></a>
+                                <a><i class="bi bi-trash"></i></a>
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</div>
+
+<!-- <div >
+    <app-invoice-pdf #pdfchild  [parentId]="parentId" ></app-invoice-pdf>
+</div> -->
+
+<!-- *ngIf="invoice_ID" -->
+<!-- <app-invoice-pdf [parentId]="parentId" ></app-invoice-pdf> -->
+<!-- [invoicePdf]="invoicePdf" -->

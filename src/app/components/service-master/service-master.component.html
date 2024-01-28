@@ -1,0 +1,144 @@
+<header class="header-section">
+    <div class="header-content">
+        <p class="header-value">services</p>
+    </div>
+</header>
+
+<section id="inputContent">
+    <div class="container px-1 py-5">
+        <form id="formAwesome" [formGroup]="serviceForm">
+            <div class="form-group row">
+                <div class="col-md-6 col-sm-3">
+                    <div class="row mb-3">
+                        <label for="serviceID" class="col-sm-2 col-form-label custom-label">Service ID<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="serviceID" placeholder="Service ID"
+                                formControlName="serviceID" (change)="appendserviceIDName()">
+                            <div
+                                *ngIf="serviceForm.get('serviceID').hasError('required') && (serviceForm.get('serviceID').dirty || serviceForm.get('serviceID').touched)">
+                                <span class="text-danger">Service ID is required.</span>
+                            </div>
+                        </div>
+
+                        <label for="serviceName" class="col-sm-2 col-form-label custom-label">Service Name<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="serviceName" placeholder="Service Name"
+                                formControlName="serviceName" (change)="appendserviceIDName()">
+                            <div
+                                *ngIf="serviceForm.get('serviceName').hasError('required') && (serviceForm.get('serviceName').dirty || serviceForm.get('serviceName').touched)">
+                                <span class="text-danger">Service Name is required.</span>
+                            </div>
+                        </div>
+                        <label for="serviceIDName" class="col-sm-2 col-form-label custom-label">Service ID Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="serviceIDName" placeholder="Service IDName"
+                                formControlName="serviceIDName" readonly>
+                        </div>
+                        <!-- <label for="discountType" class="col-sm-2 col-form-label custom-label">Discount Type</label>
+                        <div class="col-sm-10">
+                            <select id="discountType" class="form-select" formControlName="discountType" placeholder="Discount Type">
+                                <option selected>select</option>
+                                <option *ngFor="let discountValue of discountTypeValues" [ngValue]="discountValue">{{ discountValue
+                                    }}</option>
+                            </select>
+                        </div> -->
+
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-3">
+                    <div class="row mb-3">
+                        <label for="serviceCategory" class="col-sm-2 col-form-label custom-label">Service Category</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="serviceCategory" placeholder="Service Category"
+                                formControlName="serviceCategory">
+                        </div>
+                        <label for="serviceCost" class="col-sm-2 col-form-label custom-label">Service Cost<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="serviceCost" placeholder="Service Cost"
+                                formControlName="serviceCost">
+                            <div *ngIf="serviceForm.get('serviceCost').hasError('required') && (serviceForm.get('serviceCost').dirty || serviceForm.get('serviceCost').touched)"
+                                class="col-sm-10">
+                                <span class="text-danger">Service Cost is required.</span>
+                            </div>
+                            <div *ngIf="serviceForm.get('serviceCost').hasError('pattern') && (serviceForm.get('serviceCost').dirty || serviceForm.get('serviceCost').touched)"
+                                class="col-sm-10">
+                                <span class="text-danger">Invalid service cost format. Please enter a valid
+                                    number.</span>
+                            </div>
+                        </div>
+                        <label for="tax" class="col-sm-2 col-form-label custom-label">Tax</label>
+                        <div class="col-sm-10">
+                        <ng-multiselect-dropdown
+                        [placeholder]="'select tax'"
+                        [settings]="dropdownSettings"
+                        [data]="taxMasters"
+                        [formControl]="$any(serviceForm.controls['taxMasterInfos'])"
+                      >
+                      </ng-multiselect-dropdown>
+                    </div>
+                      <!-- <ng-multiselect-dropdown [placeholder]="'Select'" [settings]="dropdownSettings"
+                      [data]="taxIDs" [formControl]="soLineForm.controls['saleTaxes']"
+                      (focusout)="calculateTaxPercentage()">
+                    </ng-multiselect-dropdown> -->
+           
+                    </div>
+                </div>
+                <label for="serviceDescription" class="col-sm-1 col-form-label custom-label">Description</label>
+                <div class="col-sm-11">
+                    <textarea type="text" class="form-control" id="serviceDescription" placeholder="Description"
+                        formControlName="serviceDescription"> </textarea>
+                </div>
+
+
+                <div class="col-12 d-flex">
+                    <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
+                        [disabled]="!serviceForm.valid" (click)="saveOrEdit()">{{saveEdit}}</button>
+                    <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3"
+                        (click)="clear()">clear</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+
+<section class="table-section">
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Service Id</th>
+                    <th>Service Name</th>
+                    <th>Service IDName</th>
+                    <th>Service Category</th>
+                    <th>Service Cost</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let service of serviceMasters; let i= index ">
+                    <td>{{service.serviceID}}</td>
+                    <td>{{service.serviceName}}</td>
+                    <td>{{service.serviceIDName}}</td>
+                    <td>{{service.serviceCategory}}</td>
+                    <td>{{service.serviceCost}}</td>
+                    <td>{{service.serviceDescription}}</td>
+                    <td>
+                        <span>
+                            <a><i class="bi bi-pencil-square me-4" (click)="edit(service)"></i> </a>
+                            <a><i class="bi bi-trash" (click)="deleteServiceMaster(service)"></i> </a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+<app-deletemodelpopup [getInfo]="serviceMaster" (deleteResponse)="getDeleteConfirmation($event)"></app-deletemodelpopup>

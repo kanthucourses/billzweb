@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Invoice Template</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="invoice-box" id="invoice" #invoice>
+            <div class="row">
+                <div class="col-2">
+                    <div *ngIf="imageUrl">
+                        <img 
+                        height="80"
+                        width="130"
+                        alt="Logo"
+                        loading="lazy"
+                        [src]="'data:image/jpg;base64,' + imageUrl" 
+                        class="preview">
+                      </div>
+                </div>
+                <div class="col-8">
+                    <h2 class="text-center">{{organization?.organizationName}}</h2>
+                    <p class="text-center">{{organization?.address}}<br>{{organization?.city}}, {{organization?.state}} {{organization?.pincode}}</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <strong>Bill To</strong>
+                    <p>Name: {{invoiceObj?.customerDetails?.customerName}}<br>Address:
+                        {{invoiceObj?.customerDetails?.address}}<br>
+                        {{invoiceObj?.customerDetails?.city}},{{invoiceObj?.customerDetails?.state}}<br>
+                        {{invoiceObj?.customerDetails?.pincode}} <br></p>
+                </div>
+                <div class="col-6 text-right">
+                    <strong>Ship From</strong>
+                    <p>Address: {{organization?.address}}<br>
+                        {{organization?.city}},{{organization?.state}}<br>
+                        {{organization?.pincode}} <br></p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-4">
+                    <strong>Registered Date</strong>
+                    <p>11/02/2019</p>
+                </div>
+                <div class="col-4">
+                    <strong>Order No#</strong>
+                    <p>{{invoiceObj?.invoiceID}}</p>
+                </div>
+                <div class="col-4 text-right">
+                    <strong>Bill Date</strong>
+                    <p>26/02/2019</p>
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-1">Service ID</th>
+                        <th class="col-1">Service Name</th>
+                        <th class="col-1">Service Cost</th>
+                        <th class="col-1">Qty</th>
+                        <th class="col-1">Gross Amount</th>
+                        <th class="col-2">Tax</th>
+                        <th class="col-1">Discount Amount</th>
+                        <th class="col-1">Net Amount</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoiceLine of invoiceObj.invoiceLines; let i= index ">
+                        <td>{{invoiceLine.serviceID}}</td>
+                        <td>{{invoiceLine.serviceName}}</td>
+                        <td>{{invoiceLine.serviceCost}}</td>
+                        <td>{{invoiceLine.quantity}}</td>
+                        <td>{{invoiceLine.grossAmount}}</td>
+                        <td >
+                             <span *ngFor="let taxDetails of invoiceLine.taxDetailsList; let i=index">
+                            {{taxDetails.taxName}} @ {{taxDetails.taxPercentage}}%:{{taxDetails.taxAmount}}<br>
+                             </span>
+                       </td>
+                       
+                        <td>{{invoiceLine.discountAmount}}</td>
+                        <td>{{invoiceLine.netAmount}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <div class="row my-5">
+                <div class="col-6">
+                    <p>Payment Status : {{invoiceObj.paymentStatus}} </p>
+                    <p>Payment Method : {{invoiceObj.paymentMethod}} </p>
+                </div>
+                <div class="col-6 text-right">
+                    <p>Gross Amount: {{invoiceObj.totalGrossAmount}} <br>
+                    Tax Amount: {{invoiceObj.totalTaxAmount}}<br>
+                    Discount Amount: {{invoiceObj.totalDiscountAmount}}</p>
+                    <h4>Total: {{invoiceObj.totalNetAmount}}</h4>
+                    <p>{{organization?.managerName}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<div class="container download-pdf col-6 d-flex">
+    <button id="btnSave" type="button" class="btn btn-info btn-block ms-auto mb-3"
+        (click)="downloadPDF()">download</button>
+</div>

@@ -1,0 +1,125 @@
+* {
+    font-family: sans-serif;
+}
+
+/* ::-webkit-input-placeholder {
+    font-size: 15px;
+} */
+
+
+/* .header-section {
+    border-bottom: 1px solid #ccc;
+    background-color: lightgrey;
+} */
+
+.header-content {
+    margin-left: 50px;
+    padding-top: 30px;
+    font-weight: 200;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+.header-value{
+    letter-spacing: 3px;
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+
+
+/* body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+} */
+
+.blue-text {
+    color: #00BCD4
+}
+
+.form-control-label {
+    margin-bottom: 0
+}
+
+label{
+    font-size: 15px;
+}
+
+input,
+textarea,
+button {
+    padding: 8px 15px;
+    border-radius: 5px !important;
+    margin: 5px 0px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 15px !important;
+    /* font-weight: 300 */
+}
+
+input:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #3292a6;
+    outline-width: 0;
+    font-weight: 400
+}
+
+.btn-block {
+    /* text-transform: uppercase; */
+    font-size: 15px !important;
+    /* font-weight: 400; */
+    /* height: 43px; */
+    cursor: pointer
+}
+
+.btn-block:hover {
+    color: #fff !important
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0;
+}
+
+/* #btnSave {
+    background-color: #008080;
+    color: white;
+} */
+
+table{
+    font-size: 15px;
+}
+
+a {
+    color: black;
+    text-decoration: none !important;
+    /* padding: 14px 25px; */
+}
+
+a:link {
+    text-align: center;
+}
+a { 
+    cursor: pointer;
+ }
+a:hover {
+    //  background-color: rgb(20, 3, 134);
+    //  color: white
+  }
+
+  .taxSearch{
+    width: 555px !important;
+  }
+  
+  .custom-label{
+    font-size: 14px;
+  }
+  th{
+    font-size: 14px;
+  }
