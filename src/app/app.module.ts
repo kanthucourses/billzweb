@@ -23,7 +23,9 @@ import { OrganizationComponent } from './components/masters/organization/organiz
 import { TaxMasterComponent } from './components/masters/tax-master/tax-master.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';  
-import { DatePipe } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DataTablesModule } from 'angular-datatables';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -47,13 +49,22 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        positionClass: 'toast-center',
+        preventDuplicates: true
+      }
+    ),
     NgxSmartModalModule.forRoot(),
     NgSelectModule,
     NgMultiSelectDropDownModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    DataTablesModule,
+    NgxSpinnerModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

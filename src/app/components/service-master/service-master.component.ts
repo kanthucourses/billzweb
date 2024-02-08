@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { MastersService } from 'src/app/services/integration-services/masters.service';
 import { SharedDataServiceService } from 'src/app/services/shared/shared-data-service.service';
+import { SpinnerService } from 'src/app/shared/common/spinner.service';
 
 @Component({
   selector: 'app-service-master',
   templateUrl: './service-master.component.html',
   styleUrls: ['./service-master.component.scss']
 })
-export class ServiceMasterComponent implements OnInit {
+export class ServiceMasterComponent implements OnInit, OnDestroy, AfterViewInit {
 
   serviceForm !: FormGroup;
   serviceMaster: any;
@@ -43,7 +48,10 @@ export class ServiceMasterComponent implements OnInit {
     "organizationIDName": null,
   }
   discountTypeValues: any = ["Percentage", "Amount"]
-
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
   ngOnInit(): void {
     this.sharedDataService.organizationDropdownValue$.subscribe(value => {
       this.organizationIDName = value;
@@ -52,7 +60,10 @@ export class ServiceMasterComponent implements OnInit {
       console.log(this.serviceMasterFilter)
       this.findAllServiceMasters(this.serviceMasterFilter);
       this.fetchAllTaxMasters(this.taxMasterFilter);
-
+      this.dtOptions = {
+        pagingType: 'full_numbers',
+        pageLength: 5,
+      };
     });
     this.sharedDataService.organizationInfoDropdownValue$.subscribe(value => {
       this.organizationInfo = value;
@@ -60,8 +71,15 @@ export class ServiceMasterComponent implements OnInit {
     });
 
     this.createServiceMasterForm();
-
+   // this.spinnerService.showSpinner();
   }
+
+  // showSpinner() {
+  //   this.spinner.show(undefined, {
+  //     type: 'ball-spin-clockwise',
+  //     size: 'medium'
+  //   });
+  // }
 
   createServiceMasterForm() {
     this.serviceForm = this.fb.group({
@@ -111,6 +129,7 @@ export class ServiceMasterComponent implements OnInit {
 
   saveServiceMaster() {
     this.serviceMaster = this.serviceForm.value;
+    //this.spinnerService.showSpinner();
     console.log(this.serviceMaster)
     let matchedTaxMasterInfo =null;
     if(this.serviceMaster.taxMasterInfos != null && this.serviceMaster.taxMasterInfos.length>0){
@@ -119,22 +138,43 @@ export class ServiceMasterComponent implements OnInit {
     this.serviceMaster.taxMasterInfos = matchedTaxMasterInfo;
     console.log(this.serviceMaster)
     this.serviceMaster.organizationInfo = this.organizationInfo;
+   
     this.mastersService.saveServiceMaster(this.serviceMaster)?.subscribe(
       (response: any) => {
         if (response && response.status === "0" && response.data.serviceMaster) {
           this.clear();
+          this.rerender();
           this.findAllServiceMasters(this.serviceMasterFilter);
           this.toastr.success(response.statusMsg);
+         // this.spinnerService.hideSpinner();
         }
         else {
-          this.serviceMasters = [];
+          console.log(response.statusMsg)
+          this.toastr.error(response.statusMsg);
+         // this.spinnerService.hideSpinner();
         }
       }
       ,
       (error: any) => {
-        this.serviceMasters = [];
+        this.toastr.error(error.error.statusMsg);
+       // this.spinnerService.hideSpinner();
       }
     )
+  }
+
+
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
+  }
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtTrigger.next();
+      dtInstance.destroy();
+    });
+  }
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   clear() {
@@ -182,16 +222,19 @@ export class ServiceMasterComponent implements OnInit {
     this.mastersService.updateServiceMaster(this.serviceMaster)?.subscribe(
       (response: any) => {
         if (response && response.status === "0" && response.data.serviceMaster) {
+          this.toastr.success(response.statusMsg);
           this.clear();
+          this.rerender();
           this.findAllServiceMasters(this.serviceMasterFilter);
         }
         else {
+          this.toastr.error(response.statusMsg);
           this.serviceMaster = {};
         }
       }
       ,
       (error: any) => {
-        this.serviceMaster = {};
+        this.toastr.error(error.error.statusMsg);
       }
     )
   }
@@ -201,6 +244,7 @@ export class ServiceMasterComponent implements OnInit {
       (response: any) => {
         if (response && response.status === "0") {
           this.serviceMasters = response.data.serviceMasters;
+          this.rerender();
         }
         else {
           this.serviceMasters = [];

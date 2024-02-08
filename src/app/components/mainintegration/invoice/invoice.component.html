@@ -1,6 +1,7 @@
 <header class="header-section">
     <div class="header-content">
         <p class="header-value">Invoice</p>
+        <a routerLink ="/invoiceList" ><i class="bi bi-arrow-left-circle-fill"></i></a>
     </div>
 </header>
 <div class="container" [formGroup]="invoiceForm">
@@ -12,25 +13,35 @@
                         <div class="row mb-3">
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="customerName" class="col-sm-2 col-form-label custom-label">Customer
-                                    Name</label>
+                                    Name<span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="customerName" class="form-control"
-                                        id="customerName" placeholder="customer name">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="customerName"
+                                        class="form-control" id="customerName" placeholder="customer name">
+                                    <div
+                                        *ngIf="invoiceForm.get('customerDetails').get('customerName').hasError('required') 
+                                        && (invoiceForm.get('customerDetails').get('customerName').dirty || invoiceForm.get('customerDetails').get('customerName').touched)">
+                                        <span class="text-danger">Customer Name is required.</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="emailID" class="col-sm-2 col-form-label custom-label">Email ID</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="emailID" class="form-control" id="emailID"
-                                        placeholder="email id">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="emailID"
+                                        class="form-control" id="emailID" placeholder="email id">
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="phoneNumber" class="col-sm-2 col-form-label custom-label">Phone
-                                    Number</label>
+                                    Number<span class="text-danger">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="phoneNumber" class="form-control"
-                                        id="phoneNumber" placeholder="phone number">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="phoneNumber"
+                                        class="form-control" id="phoneNumber" placeholder="phone number">
+                                    <div
+                                        *ngIf="invoiceForm.get('customerDetails').get('phoneNumber').hasError('required') 
+                                        && (invoiceForm.get('customerDetails').get('phoneNumber').dirty || invoiceForm.get('customerDetails').get('phoneNumber').touched)">
+                                        <span class="text-danger">Phone Number is required.</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
@@ -38,50 +49,51 @@
                                     class="col-sm-2 col-form-label custom-label">Alternative Phone
                                     No</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="alternativePhoneNumber" class="form-control"
-                                        id="alternativePhoneNumber" placeholder="alternative phone number">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="alternativePhoneNumber"
+                                        class="form-control" id="alternativePhoneNumber"
+                                        placeholder="alternative phone number">
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                   
+
                     <div class="col-md-4 col-sm-3">
 
                         <div class="row mb-3">
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="address" class="col-sm-2 col-form-label custom-label">Address</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="address" class="form-control" id="address"
-                                        placeholder="address">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="address"
+                                        class="form-control" id="address" placeholder="address">
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="city" class="col-sm-2 col-form-label custom-label">City</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="city" class="form-control" id="city"
-                                        placeholder="city">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="city"
+                                        class="form-control" id="city" placeholder="city">
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="state" class="col-sm-2 col-form-label custom-label">State</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="state" class="form-control" id="state"
-                                        placeholder="state">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="state"
+                                        class="form-control" id="state" placeholder="state">
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="country" class="col-sm-2 col-form-label custom-label">Country</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="country" class="form-control" id="country"
-                                        placeholder="country">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="country"
+                                        class="form-control" id="country" placeholder="country">
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
                                 <label for="pincode" class="col-sm-2 col-form-label custom-label">Pincode</label>
                                 <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="pincode" class="form-control" id="pincode"
-                                        placeholder="pincode">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="pincode"
+                                        class="form-control" id="pincode" placeholder="pincode">
                                 </div>
                             </div>
                         </div>
@@ -90,11 +102,13 @@
                         <div class="row mb-3">
                             <div class="form-group row">
                                 <label for="invoiceDate" class="col-sm-2 col-form-label custom-label">Invoice
-                                    Date {{isReadOnly}}</label>
+                                    Date</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" [attr.disabled]="isReadOnly ? true : null" id="invoiceDate" placeholder="invoice date"
-                                        bsDatepicker [(ngModel)]="invoiceDate" [ngModelOptions]="{standalone:true}"
-                                        [bsConfig]="datePickerConfig" (ngModelChange)="changeInvoiceDate()" autocomplete="off">
+                                    <input type="text" class="form-control" [attr.disabled]="isReadOnly ? true : null"
+                                        id="invoiceDate" placeholder="invoice date" bsDatepicker
+                                        [(ngModel)]="invoiceDate" [ngModelOptions]="{standalone:true}"
+                                        [bsConfig]="datePickerConfig" (ngModelChange)="changeInvoiceDate()"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <!-- <div class="form-group row">
@@ -106,22 +120,14 @@
                                     </select>
                                 </div>
                             </div> -->
-                            <div class="form-group row">
-                                <label for="invoiceStatus" class="col-sm-2 col-form-label custom-label">Invoice
-                                    Status</label>
-                                <div class="col-sm-10">
-                                    <select id="invoiceStatus" class="form-select" [attr.disabled]="isReadOnly ? true : null" formControlName="invoiceStatus" placeholder="invoice status">
-                                        <option value=null>select</option>
-                                        <option value="Created">Created</option>
-                                        <option value="Confirmed">Confirmed</option>
-                                    </select>
-                                </div>
-                            </div>
+                           
                             <div class="form-group row">
                                 <label for="paymentMethod" class="col-sm-2 col-form-label custom-label">Payment
                                     Method</label>
                                 <div class="col-sm-10">
-                                    <select id="paymentMethod" class="form-select" [attr.disabled]="isReadOnly ? true : null" formControlName="paymentMethod" placeholder="payment method">
+                                    <select id="paymentMethod" class="form-select"
+                                        [attr.disabled]="isPaymentDone ? true : null" formControlName="paymentMethod"
+                                        placeholder="payment method">
                                         <option value=null>select</option>
                                         <option value="Cash">Cash</option>
                                         <option value="UPI">UPI</option>
@@ -134,14 +140,16 @@
                                 <label for="paymentStatus" class="col-sm-2 col-form-label custom-label">Payment
                                     Status</label>
                                 <div class="col-sm-10">
-                                    <select id="paymentStatus" class="form-select" formControlName="paymentStatus" placeholder="payment status">
+                                    <select id="paymentStatus" class="form-select" 
+                                    [attr.disabled]="isPaymentDone ? true : null" formControlName="paymentStatus"
+                                        placeholder="payment status">
                                         <option value=null>select</option>
                                         <option value="Paid">Paid</option>
                                         <option value="Due">Due</option>
                                     </select>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -150,8 +158,8 @@
 
         <div class="form-group row">
             <div class="col-2 mt-5">
-                <button id="btnSave" type="button" class="btn btn-info btn-block me-auto" 
-                [attr.disabled]="isReadOnly ? true : null" (click)="addControl()">add service</button>
+                <button id="btnSave" type="button" class="btn btn-info btn-block me-auto"
+                    [attr.disabled]="isReadOnly ? true : null" (click)="addControl()">add service</button>
             </div>
             <div class="col-2">
                 <!-- dummy -->
@@ -207,73 +215,65 @@
                             <th scope="col">
                                 <input type="checkbox" name="isCheckAll" />
                             </th>
-                            <th class="serviceHeader" scope="col">Service IDName {{isReadOnly}}</th>
+                            <th class="serviceHeader" scope="col">Service IDName</th>
                             <th scope="col">Service Name</th>
                             <th scope="col">Service Cost</th>
                             <th class="qty" scope="col">Quantity</th>
                             <th scope="col">Gross Amount</th>
                             <th class="taxHeader" scope="col">tax</th>
-                            <th scope="col" >Discount(%)</th>
+                            <th scope="col">Discount(%)</th>
                             <th scope="col">Net Amount</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let invoiceLine of invoiceLinesHelperArr; let i=index"
-                            >
+                        <tr *ngFor="let invoiceLine of invoiceLinesHelperArr; let i=index">
                             <td scope="row" class="align-middle">
                                 <input type="checkbox" />
                             </td>
-                            
+
                             <td class="serviceSearch">
-                                <ng-select class="auto-grow custom"  
-                                [disabled]="isReadOnly"
-                                 placeholder="select service" [searchable]="true"
-                                [items]="serviceMasters" 
-                                bindLabel="serviceIDName"
-                                bindValue="serviceIDName"
-                                [(ngModel)]="invoiceLine.serviceIDName"
-                                [ngModelOptions]="{standalone:true}"
-                                (ngModelChange)="onServiceSelect($event,i);">
+                                <ng-select class="auto-grow custom" [disabled]="isReadOnly" placeholder="select service"
+                                    [searchable]="true" [items]="serviceMasters" bindLabel="serviceIDName"
+                                    bindValue="serviceIDName" [(ngModel)]="invoiceLine.serviceIDName"
+                                    [ngModelOptions]="{standalone:true}" (ngModelChange)="onServiceSelect($event,i);"
+                                    #serviceSelectValidation="ngModel" required>
                                 </ng-select>
+                                <div *ngIf="serviceSelectValidation.invalid">
+                                    <span class="text-danger">Service is required.</span>
+                                </div>
                                 <!-- <input type="text" class="form-control" formControlName="serviceIDName"
                                     placeholder="service idname"> -->
                             </td>
                             <td>
-                                <input type="text" [readonly]="isReadOnly" class="form-control" 
-                                    placeholder="service name"  [(ngModel)]="invoiceLine.serviceName"
+                                <input type="text" [readonly]="isReadOnly" class="form-control"
+                                    placeholder="service name" [(ngModel)]="invoiceLine.serviceName"
                                     [ngModelOptions]="{standalone:true}">
                             </td>
                             <td>
-                                <input type="number" [readonly]="isReadOnly" class="form-control" 
+                                <input type="number" [readonly]="isReadOnly" class="form-control"
                                     placeholder="service cost" [(ngModel)]="invoiceLine.serviceCost"
                                     [ngModelOptions]="{standalone:true}"
-                                    (focusout) = "amountCalculation(invoiceLine,i);totalAmountCalculation();"
-                                   >
+                                    (change)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                    #serviceCostValidation="ngModel" required>
                             </td>
                             <td class="qty">
-                                <input type="number" [readonly]="isReadOnly" class="form-control" 
-                                    placeholder="quantity" [(ngModel)]="invoiceLine.quantity"
-                                    [ngModelOptions]="{standalone:true}"
-                                    (focusout) = "amountCalculation(invoiceLine,i);totalAmountCalculation();"
-                                   >
+                                <input type="number" [readonly]="isReadOnly" class="form-control" placeholder="quantity"
+                                    [(ngModel)]="invoiceLine.quantity" [ngModelOptions]="{standalone:true}"
+                                    (change)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                    #quantityValidation="ngModel" required>
                             </td>
                             <td>
-                                <input type="number" [readonly]="isReadOnly" class="form-control"  readonly
+                                <input type="number" [readonly]="isReadOnly" class="form-control" readonly
                                     placeholder="gross" [(ngModel)]="invoiceLine.grossAmount"
                                     [ngModelOptions]="{standalone:true}">
                             </td>
-                            <td class="taxSearch" >
-                                <ng-multiselect-dropdown 
-                                [disabled]="isReadOnly" 
-                                [placeholder]="'tax'" 
-                                [settings]="dropdownSettings"
-                                [data]="invoiceLine.taxMasterInfosDropdownData" 
-                                [(ngModel)]="invoiceLine.taxMasterInfos"
-                                [ngModelOptions]="{standalone:true}"
-                                (onSelect)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
-                                (onDeSelect)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
-                                 >
+                            <td class="taxSearch">
+                                <ng-multiselect-dropdown [disabled]="isReadOnly" [placeholder]="'tax'"
+                                    [settings]="dropdownSettings" [data]="invoiceLine.taxMasterInfosDropdownData"
+                                    [(ngModel)]="invoiceLine.taxMasterInfos" [ngModelOptions]="{standalone:true}"
+                                    (onSelect)="amountCalculation(invoiceLine,i);totalAmountCalculation();"
+                                    (onDeSelect)="amountCalculation(invoiceLine,i);totalAmountCalculation();">
                                 </ng-multiselect-dropdown>
                                 <!-- (onDropDownClose) = "onTaxChange($event, invoiceLine, i)" -->
                                 <!-- formControlName="invoiceForm.get('invoiceLines')['controls'][i]['controls']['taxDetailsList'].value.taxNamePercentage" -->
@@ -284,18 +284,17 @@
                                 <input type="number" [readonly]="isReadOnly" class="form-control"
                                     placeholder="discountPercentage" [(ngModel)]="invoiceLine.discountPercentage"
                                     [ngModelOptions]="{standalone:true}"
-                                    (focusout) = "amountCalculation(invoiceLine,i);totalAmountCalculation();"
-                                   >
+                                    (keyup)="amountCalculation(invoiceLine,i);totalAmountCalculation();">
                             </td>
-                            
+
                             <td>
-                                <input type="number" [readonly]="isReadOnly" class="form-control"  readonly
+                                <input type="number" [readonly]="isReadOnly" class="form-control" readonly
                                     placeholder="netAmount" [(ngModel)]="invoiceLine.netAmount"
                                     [ngModelOptions]="{standalone:true}">
                             </td>
                             <td>
                                 <button type="button" class="btn  btn-block remove-button"
-                                [attr.disabled]="isReadOnly ? true : null" (click)="removeInvoiceLine(i)"> X
+                                    [attr.disabled]="isReadOnly ? true : null" (click)="removeInvoiceLine(i)"> X
                                 </button>
                             </td>
                         </tr>
@@ -303,11 +302,15 @@
                 </table>
             </div>
         </section>
-        <div class="col-12 d-flex">
+        <div class="col-12 d-flex">{{!invoiceForm.valid}} {{!isServiceValid()}} {{isUpdateBtnReadOnly}}
             <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
-            [attr.disabled]="isUpdateBtnReadOnly ? true : null" (click)="saveOrEdit()">{{saveEdit}}</button>
-            <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3" 
-            [attr.disabled]="isReadOnly ? true : null" (click)="clear()">clear</button>
+                [attr.disabled]="!invoiceForm.valid || (!isReadOnly && !isServiceValid())  || isUpdateBtnReadOnly ? true : null"
+                (click)="saveOrEdit()">{{saveEdit}}</button>
+                <button id="btnConfirm" type="button" class="btn btn-success btn-block ms-2"
+                [attr.disabled]="!invoiceForm.valid || (!isServiceValid()) || isUpdateBtnReadOnly ? true : null"
+               (click)="confirmInvoice()">Confirm</button>
+            <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3"
+                [attr.disabled]="isReadOnly ? true : null" (click)="clear()">clear</button>
         </div>
     </form>
 </div>
@@ -380,7 +383,8 @@
                         <td>{{invoiceLine?.netAmount}}</td>
                         <td>
                             <span>
-                                <a [class.disabled]="!isDelete"><i class="bi bi-trash ps-4" (click)="deleteInvoice(null,invoiceLine)"></i></a>
+                                <a [class.disabled]="!isDelete"><i class="bi bi-trash ps-4"
+                                        (click)="deleteInvoice(null,invoiceLine)"></i></a>
                             </span>
                         </td>
                     </tr>

@@ -1,26 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MastersService } from 'src/app/services/integration-services/masters.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { SharedDataServiceService } from 'src/app/services/shared/shared-data-service.service';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tax-master',
   templateUrl: './tax-master.component.html',
   styleUrls: ['./tax-master.component.scss']
 })
-export class TaxMasterComponent implements OnInit {
+export class TaxMasterComponent implements OnInit,OnDestroy, AfterViewInit {
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
   taxMasterForm: FormGroup;
   statusValues: any = ["Active", "In Active"]
   taxMaster: any;
   taxMasters: any[] = [];
   saveEdit = "save";
-  organizationIDName:any;
-  organizationInfo :any;
+  organizationIDName: any;
+  organizationInfo: any;
   taxMasterFilter = {
-    "taxName":null,
-    "organizationIDName":null,
+    "taxName": null,
+    "organizationIDName": null,
   }
   constructor(private mastersService: MastersService,
     private toastr: ToastrService,
@@ -33,16 +39,19 @@ export class TaxMasterComponent implements OnInit {
   ngOnInit(): void {
     this.sharedDataService.organizationDropdownValue$.subscribe(value => {
       this.organizationIDName = value;
-      console.log("organizationIDName>"+this.organizationIDName)
+      console.log("organizationIDName>" + this.organizationIDName)
       this.taxMasterFilter.organizationIDName = this.organizationIDName;
       this.fetchAllTaxMasters(this.taxMasterFilter);
     });
     this.sharedDataService.organizationInfoDropdownValue$.subscribe(value => {
       this.organizationInfo = value;
     });
-this.createTaxMasterForm();
-//this.fetchAllTaxMasters();
-
+    this.createTaxMasterForm();
+    //this.fetchAllTaxMasters();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+    };
   }
 
   createTaxMasterForm() {
@@ -78,18 +87,32 @@ this.createTaxMasterForm();
       (response: any) => {
         if (response && response.status === "0" && response.data.taxMaster) {
           this.clear();
+          this.rerender();
           this.fetchAllTaxMasters(this.taxMasterFilter);
           this.toastr.success(response.statusMsg);
         }
         else {
-          this.taxMasters = [];
+          this.toastr.error(response.statusMsg);
         }
       }
       ,
       (error: any) => {
-        this.taxMasters = [];
+        this.toastr.error(error.error.statusMsg);
       }
     )
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
+  }
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.dtTrigger.next();
+      dtInstance.destroy();
+    });
+  }
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   clear() {
@@ -109,16 +132,17 @@ this.createTaxMasterForm();
       (response: any) => {
         if (response && response.status === "0" && response.data.taxMaster) {
           this.clear();
+          this.rerender();
           this.fetchAllTaxMasters(this.taxMasterFilter);
           this.toastr.success(response.statusMsg);
         }
         else {
-          this.taxMasters = [];
+          this.toastr.success(response.statusMsg);
         }
       }
       ,
       (error: any) => {
-        this.taxMasters = [];
+        this.toastr.error(error.error.statusMsg);
       }
     )
   }
@@ -128,6 +152,7 @@ this.createTaxMasterForm();
       (response: any) => {
         if (response && response.status === "0") {
           this.taxMasters = response.data.taxMasters;
+          this.rerender();
         }
         else {
           this.taxMasters = [];

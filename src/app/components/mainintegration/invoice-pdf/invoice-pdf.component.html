@@ -28,17 +28,19 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-6">
+                <div class="col-6 billto-address">
                     <strong>Bill To</strong>
-                    <p>Name: {{invoiceObj?.customerDetails?.customerName}}<br>Address:
-                        {{invoiceObj?.customerDetails?.address}}<br>
-                        {{invoiceObj?.customerDetails?.city}},{{invoiceObj?.customerDetails?.state}}<br>
+                    <p class="equal-width-address">Name: {{invoiceObj?.customerDetails?.customerName}}<br>Address:
+                        {{invoiceObj?.customerDetails?.address}},<br>
+                        {{invoiceObj?.customerDetails?.city}},
+                        {{invoiceObj?.customerDetails?.state}}<br>
                         {{invoiceObj?.customerDetails?.pincode}} <br></p>
                 </div>
-                <div class="col-6 text-right">
+                <div class="col-6 shipfrom-address">
                     <strong>Ship From</strong>
-                    <p>Address: {{organization?.address}}<br>
-                        {{organization?.city}},{{organization?.state}}<br>
+                    <p  class="equal-width-ship-from-address">Address: {{organization?.address}},<br>
+                        {{organization?.city}},
+                        {{organization?.state}}<br>
                         {{organization?.pincode}} <br></p>
                 </div>
             </div>
@@ -101,7 +103,7 @@
                     <p>Gross Amount: {{invoiceObj.totalGrossAmount}} <br>
                     Tax Amount: {{invoiceObj.totalTaxAmount}}<br>
                     Discount Amount: {{invoiceObj.totalDiscountAmount}}</p>
-                    <h4>Total: {{invoiceObj.totalNetAmount}}</h4>
+                    <h6>Total: {{invoiceObj.totalNetAmount}}</h6>
                     <p>{{organization?.managerName}}</p>
                 </div>
             </div>

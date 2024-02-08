@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BsDatepickerConfig, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -38,6 +38,7 @@ export class InvoiceComponent implements OnInit {
   taxMasterInfos = [];
   serviceTaxMasterInfos = [];
   invoiceLineHelperObj = {
+    "lineID": null,
     "invoiceLineID": null,
     "serviceID": null,
     "serviceName": null,
@@ -84,13 +85,75 @@ export class InvoiceComponent implements OnInit {
     "invoiceID": null,
     "organizationIDName": null,
   }
+ 
+
+  //serviceSelectValidation : any
+  //serviceQtyValidation : any
+  //@ViewChild('serviceSelectValidation', { read: NgModel }) serviceSelectValidation: NgModel;
+  /*
+  @ViewChild('serviceSelectValidation', { read: NgModel }) serviceSelectValidation: NgModel | undefined;
+  @ViewChild('serviceCostValidation', { read: NgModel }) serviceCostValidation: NgModel | undefined;
+  @ViewChild('quantityValidation', { read: NgModel }) quantityValidation: NgModel | undefined;
+
+  
+  isServiceValid(): boolean {
+    const isServiceSelectValid = this.serviceSelectValidation ? this.serviceSelectValidation.valid : true;
+    const isServiceCostValid = this.serviceCostValidation ? this.serviceCostValidation.valid : true;
+    const isQuantityValid = this.quantityValidation ? this.quantityValidation.valid : true;
+  console.log(isServiceSelectValid)
+  console.log(isServiceCostValid)
+  console.log(isQuantityValid)
+    return isServiceSelectValid && isServiceCostValid && isQuantityValid;
+  }
+  */
+
+  @ViewChildren('serviceSelectValidation') serviceSelectValidations!: QueryList<NgModel>;
+  @ViewChildren('serviceCostValidation') serviceCostValidations!: QueryList<NgModel>;
+  @ViewChildren('quantityValidation') quantityValidations!: QueryList<NgModel>;
+
+
+  ngAfterViewInit(): void {
+    // Call the method after view has been initialized
+    this.isServiceValid();
+  }
+
+  // Method to check if all service validations are valid for all invoice lines
+  isServiceValid(): boolean {
+    let isValid = true;
+
+    // Check if the query lists are defined
+    if (!this.serviceSelectValidations || !this.serviceCostValidations || !this.quantityValidations) {
+      return false; // Return false if any query list is undefined
+    }
+
+    this.serviceSelectValidations.forEach((serviceSelectValidation, index) => {
+      const serviceCostValidation = this.serviceCostValidations.toArray()[index];
+      const quantityValidation = this.quantityValidations.toArray()[index];
+
+      // Check if any of the validations for the current invoice line are invalid
+      if (!serviceSelectValidation.valid || !serviceCostValidation.valid || !quantityValidation.valid) {
+        isValid = false;
+        return; // Exit loop if any invalid validation is found
+      }
+    });
+
+    return isValid;
+  }
 
   //taxChangeFlag = true;
   calculationInProgress = false;
   isDelete: boolean = true;
   isReadOnly: boolean = false;
   isUpdateBtnReadOnly: boolean = false;
-  @ViewChild('ngSelectElement') ngSelectElement: ElementRef;
+  isPaymentDone: boolean = false;
+  initializeComponent(): void {
+    this.saveEdit = "save";
+    this.isDelete = true;
+    this.isReadOnly = false;
+    this.isUpdateBtnReadOnly = false;
+    this.isPaymentDone = false;
+  }
+  //@ViewChild('ngSelectElement') ngSelectElement: ElementRef;
 
   datePickerConfig: Partial<BsDatepickerConfig>;
   constructor(private fb: FormBuilder,
@@ -144,8 +207,8 @@ export class InvoiceComponent implements OnInit {
       totalDiscountAmount: [null],
       totalNetAmount: [null],
       customerDetails: this.fb.group({
-        customerName: [null],
-        phoneNumber: [null],
+        customerName: [null,Validators.required],
+        phoneNumber: [null,Validators.required],
         alternativePhoneNumber: [null],
         emailID: [null],
         address: [null],
@@ -189,16 +252,16 @@ export class InvoiceComponent implements OnInit {
     return this.invoiceLinesForm;
   }
 
-  getInvoiceHelperTaxMasterInfo(invoiceLineID: any, index: number): any {
-    let invoiceLinesHelperResult = null;
-    for (let invoiceLinesHelper of this.invoiceLinesHelperArr) {
-      if (invoiceLineID === invoiceLinesHelper.invoiceLineID) {
-        invoiceLinesHelperResult = invoiceLinesHelper;
-        break;
-      }
-    }
-    return invoiceLinesHelperResult;
-  }
+  // getInvoiceHelperTaxMasterInfo(invoiceLineID: any, index: number): any {
+  //   let invoiceLinesHelperResult = null;
+  //   for (let invoiceLinesHelper of this.invoiceLinesHelperArr) {
+  //     if (invoiceLineID === invoiceLinesHelper.invoiceLineID) {
+  //       invoiceLinesHelperResult = invoiceLinesHelper;
+  //       break;
+  //     }
+  //   }
+  //   return invoiceLinesHelperResult;
+  // }
 
   get getInvoiceLineControls() {
     const control = this.invoiceForm.get('invoiceLines') as FormArray;
@@ -213,6 +276,7 @@ export class InvoiceComponent implements OnInit {
   addControl() {
     console.log(this.invoiceLineHelperObj)
     this.invoiceLineHelperObj = {
+      "lineID":null,
       "invoiceLineID": null,
       "serviceID": null,
       "serviceName": null,
@@ -405,6 +469,12 @@ export class InvoiceComponent implements OnInit {
     }
   }
 
+  invoiceStatus : any = null;
+  confirmInvoice() {
+    this.invoiceStatus = "Confirmed"
+    this.updateInvoice();
+  }
+
   saveInvoice() {
     this.invoice = this.invoiceForm.value;
     const formattedInvoiceDate = this.datePipe.transform(this.invoiceDate, 'yyyy-MM-dd');
@@ -425,12 +495,12 @@ export class InvoiceComponent implements OnInit {
           this.toastr.success(response.statusMsg);
         }
         else {
-          this.invoices = [];
+          this.toastr.success(response.statusMsg);
         }
       }
       ,
       (error: any) => {
-        this.invoices = [];
+        this.toastr.error(error.error.statusMsg);
       }
     )
   }
@@ -442,6 +512,8 @@ export class InvoiceComponent implements OnInit {
     this.invoice.totalTaxAmount = this.totalTaxAmount
     this.invoice.taxDetailsList = this.finalTaxDetailsList
     this.invoice.invoiceLines = this.invoiceLinesHelperArr;
+    //this.invoiceStatus = this.invoice.invoiceStatus;
+    this.invoice.invoiceStatus = this.invoiceStatus
     console.log(this.invoice)
     const formattedInvoiceDate = this.datePipe.transform(this.invoiceDate, 'yyyy-MM-dd');
     this.invoice.invoiceDate = formattedInvoiceDate;
@@ -455,12 +527,12 @@ export class InvoiceComponent implements OnInit {
           this.toastr.success(response.statusMsg);
         }
         else {
-          this.invoices = [];
+          this.toastr.success(response.statusMsg);
         }
       }
       ,
       (error: any) => {
-        this.invoices = [];
+        this.toastr.error(error.error.statusMsg);
       }
     )
   }
@@ -521,12 +593,14 @@ export class InvoiceComponent implements OnInit {
     console.log(invoice);
     window.scroll(0, 0);
     this.saveEdit = "update";
+    this.invoiceStatus = invoice.invoiceStatus;
     if (invoice.invoiceStatus && invoice.invoiceStatus === "Confirmed") {
       this.isReadOnly = true;
       this.isDelete = false;
     }
     if (invoice.paymentStatus && invoice.paymentStatus === "Paid") {
       this.isUpdateBtnReadOnly = true;
+      this.isPaymentDone = true;
     }
 
     this.totalTaxAmount = invoice?.totalTaxAmount
@@ -646,7 +720,7 @@ export class InvoiceComponent implements OnInit {
 
   deleteInvoice(invoice: any, invoiceLine: any) {
     let _id = null;
-    let invoiceLineID = null;
+    let lineID = null;
     if (invoice != null && invoice) {
       _id = invoice._id;
     }
@@ -654,14 +728,17 @@ export class InvoiceComponent implements OnInit {
       _id = invoiceLine._id;
     }
     if (invoiceLine != null && invoiceLine) {
-      invoiceLineID = invoiceLine.invoiceLineID;
+      lineID = invoiceLine.lineID;
     }
-    this.invoice = { name: 'invoice', id: _id, lineid: invoiceLineID, organizationIDName: this.organizationIDName }
+    this.invoice = { name: 'invoice', id: _id, lineid: lineID, organizationIDName: this.organizationIDName }
+    console.log(this.invoice)
     this.ngxSmartModalService.getModal('deletePopup').open();
   }
 
+  
   getDeleteConfirmation(response: any) {
     if (response.status === 'Yes') {
+      this.initializeComponent();
       this.invoices = [];
       let _id = response._id;
       this.findInvoiceById(_id).subscribe((invoiceObject: any) => {
@@ -680,6 +757,7 @@ export class InvoiceComponent implements OnInit {
           this.getInvoiceLines();
           this.totalAmountCalculation();
         } else {
+          this.clear()
           this.invoices = []
           this.invoiceLinesHelperList = [];
           console.log(invoiceObject)
@@ -756,7 +834,9 @@ export class InvoiceComponent implements OnInit {
                 totalTaxAmount = totalTaxAmount + taxDetails.taxAmount;
               }
             }
+            invoiceLineObj.taxDetailsList = taxDetailsList;
           }
+        
           netAmount = grossAmount + totalTaxAmount;
           invoiceLineObj.taxAmount = totalTaxAmount;
           invoiceLineObj.netAmount = netAmount;

@@ -75,8 +75,8 @@
 </section>
 
 <section class="table-section">
-    <div class="container">
-        <table class="table table-bordered">
+    <div class="container summary-table">
+        <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
             <thead>
                 <tr>
                     <th>Tax Name</th>

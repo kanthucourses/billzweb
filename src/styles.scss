@@ -4,8 +4,10 @@
       //  "node_modules/bootstrap/dist/css/bootstrap.min.css",
             //   "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
 
+
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
 
 
 
@@ -74,3 +76,17 @@ td input::placeholder {
     background-image: none;
     border-radius: 4px;
 }
+
+//data-table 
+.dataTables_wrapper .dataTables_filter {
+    float: right !important;
+    text-align: right !important;
+    margin-bottom: 10px !important;
+}
+
+//toastr
+.toast-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

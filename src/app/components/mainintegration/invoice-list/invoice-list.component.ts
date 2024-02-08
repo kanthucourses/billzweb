@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { MainTransactionsService } from 'src/app/services/integration-services/main-transactions.service';
 import { SharedDataServiceService } from 'src/app/services/shared/shared-data-service.service';
 
@@ -10,7 +12,7 @@ import { SharedDataServiceService } from 'src/app/services/shared/shared-data-se
   templateUrl: './invoice-list.component.html',
   styleUrls: ['./invoice-list.component.scss']
 })
-export class InvoiceListComponent implements OnInit {
+export class InvoiceListComponent implements OnInit, OnDestroy {
   enableChild: true;
   parentId: any = null;
   invoice: any;
@@ -22,6 +24,14 @@ export class InvoiceListComponent implements OnInit {
   invoiceFilter = {
     "organizationIDName": null,
   }
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  dtTrigger2: any = new Subject();
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  @ViewChildren(DataTableDirective)
+  dtElements: QueryList<DataTableDirective>;
+
   constructor(private fb: FormBuilder,
     private mainTransactionsService: MainTransactionsService,
     private toastr: ToastrService,
@@ -38,6 +48,10 @@ export class InvoiceListComponent implements OnInit {
     });
     this.invoiceFilter.organizationIDName = this.organizationIDName;
     this.findAllInvoices(this.invoiceFilter);
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+    };
   }
 
   findAllInvoices(invoiceFilter) {
@@ -45,6 +59,7 @@ export class InvoiceListComponent implements OnInit {
       (response: any) => {
         if (response && response.status === "0") {
           this.invoices = response.data.invoices;
+          this.dtTrigger.next();
           this.getInvoiceLines();
           console.log(this.invoiceLinesHelperList)
         }
@@ -66,6 +81,7 @@ export class InvoiceListComponent implements OnInit {
         this.invoiceLinesHelperList.push({ ...line });
       });
     });
+    this.dtTrigger2.next();
   }
 
   editInvoice(_id: any) {
@@ -78,7 +94,19 @@ export class InvoiceListComponent implements OnInit {
     this.router.navigate(['invoicePdf/view/' + _id]);
   }
 
-  
+  rerender(): void {
+    this.dtElements.forEach((dtElement: DataTableDirective) => {
+      if (dtElement.dtInstance) {
+        dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+        });
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+    this.dtTrigger2.unsubscribe();
+  }
  
 
 }

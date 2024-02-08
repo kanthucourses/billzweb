@@ -83,16 +83,15 @@ export class OrganizationComponent implements OnInit {
         if (response && response.status === "0" && response.data.organization) {
           this.clear();
           this.fetchAllOrganizations();
-          
           this.toastr.success(response.statusMsg);
         }
         else {
-          this.organizations = [];
+          this.toastr.success(response.statusMsg);
         }
       }
       ,
       (error: any) => {
-        this.organizations = [];
+        this.toastr.error(error.error.statusMsg);
       }
     )
   }
@@ -151,12 +150,12 @@ export class OrganizationComponent implements OnInit {
           this.toastr.success(response.statusMsg);
         }
         else {
-          this.organizations = [];
+          this.toastr.success(response.statusMsg);
         }
       }
       ,
       (error: any) => {
-        this.organizations = [];
+        this.toastr.error(error.error.statusMsg);
       }
     )
   }

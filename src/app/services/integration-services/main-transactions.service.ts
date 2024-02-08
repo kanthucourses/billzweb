@@ -50,7 +50,7 @@ export class MainTransactionsService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     let req = {
       _id:_id,
-invoiceLineID : lineID,
+lineID : lineID,
 organizationIDName : organizationIDName
     }
     console.log(req)

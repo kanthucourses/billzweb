@@ -10,7 +10,7 @@ body {
     padding: 30px;
     border: 1px solid #eee;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    font-size: 16px;
+    font-size: 13px;
     line-height: 24px;
     color: #555;
     background: #fff;
@@ -23,7 +23,7 @@ body {
     display: inline-block;
     text-align: center;
     line-height: 100px;
-    font-size: 16px;
+    font-size: 13px;
     color: #fff;
     font-weight: bold;
 }
@@ -58,7 +58,7 @@ body {
 }
 .table thead th {
     border-top: none;
-    border-bottom: 2px solid #d05c5c;
+    //border-bottom: 2px solid black;
     color: #333;
     background-color: #f2f2f2;
 }
@@ -68,7 +68,53 @@ body {
 .total-table .label {
     text-align: right;
 }
-.total-table .value {
-    font-size: 24px;
-    font-weight: bold;
+// .total-table .value {
+//     font-size: 24px;
+//     font-weight: bold;
+// }
+.table{
+    font-size: 12px;
 }
+
+// .equal-width-address {
+//     display: flex;
+//     flex-wrap: wrap;
+//     width: 50%; 
+//   }
+  
+//   .equal-width-address span {
+//     flex: 1 1 auto;
+//   }
+.equal-width-address {
+    padding-right: 38px;
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    width: 50%; /* Set a specific width for the container */
+}
+
+.equal-width-address p {
+    flex: 1; /* Equal distribution of width among child elements */
+    text-align: left; /* If you want text to be left-aligned within the column */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    width: 100%; /* Set the width to 100% to maintain consistency */
+}
+  
+.equal-width-ship-from-address {
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    width: 100%; /* Set a specific width for the container */
+}
+
+.equal-width-ship-from-address p {
+    width: 100%; /* Set the width to 100% to maintain consistency */
+    text-align: left; /* If you want text to be left-aligned within the column */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+.shipfrom-address{
+    padding-left: 200px;
+}
+
+// .billto-address{
+//     margin-left: 200px;
+// }
