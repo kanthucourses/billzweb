@@ -26,7 +26,10 @@ export class DeletemodelpopupComponent implements OnInit {
   }
 
   delete() {
+    console.log(this.info)
     console.log(this.info.name)
+    console.log(this.info.id)
+
     switch (this.info.name) {
       case 'servicemaster': {
         this.mastersService.deleteServiceMaster(this.info.id).subscribe(

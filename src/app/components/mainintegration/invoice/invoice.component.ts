@@ -225,7 +225,9 @@ export class InvoiceComponent implements OnInit {
       }),
       invoiceStatus: [null],
       paymentMethod: [null],
-      paymentStatus: [null]
+      paymentStatus: [null],
+      createdDateTime : [null],
+      lastUpdatedDateTime : [null]
       // invoiceLines: this.fb.array([]),
     })
   }
@@ -620,6 +622,8 @@ export class InvoiceComponent implements OnInit {
       invoiceStatus: invoice?.invoiceStatus,
       paymentMethod: invoice?.paymentMethod,
       paymentStatus: invoice?.paymentStatus,
+      createdDateTime : invoice?.createdDateTime,
+      lastUpdatedDateTime : invoice?.lastUpdatedDateTime,
       customerDetails: {
         customerName: invoice?.customerDetails?.customerName,
         phoneNumber: invoice?.customerDetails?.phoneNumber,

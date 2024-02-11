@@ -37,7 +37,7 @@
                                 <a (click)="editInvoice(invoice._id)">
                                     <i class="bi bi-pencil-square me-4"></i>
                                 </a>                       
-                                <a [class.disabled]="invoice.invoiceStatus === 'Confirmed'"><i class="bi bi-trash"></i></a>
+                                <a [class.disabled]="invoice.invoiceStatus === 'Confirmed'"><i class="bi bi-trash" (click)="deleteInvoice(invoice,null)"></i></a>
                             </span>
                         </td>
                         <td><a (click)="invoicePdfView(invoice._id)"><i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i>PDF</a></td>
@@ -52,7 +52,7 @@
 <div class="container mt-2">
     <section class="table-section">
         <div class="container summary-table">
-            <table  class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger2">
+            <table  class="table" datatable [dtOptions]="dtOptions2" [dtTrigger]="dtTrigger2">
                 <thead>
                     <tr>
                         <th class="col">Invoice ID</th>
@@ -75,7 +75,8 @@
                         <td>
                             <span>
                                 <a><i class="bi bi-pencil-square me-4"></i></a>
-                                <a><i class="bi bi-trash"></i></a>
+                                <a><i class="bi bi-trash ps-4"
+                                    (click)="deleteInvoice(null,invoiceLine)"></i></a>
                             </span>
                         </td>
                     </tr>
@@ -86,7 +87,7 @@
 
     </section>
 </div>
-
+<app-deletemodelpopup [getInfo]="invoiceObj" (deleteResponse)="getDeleteConfirmation($event)"></app-deletemodelpopup>
 <!-- <div >
     <app-invoice-pdf #pdfchild  [parentId]="parentId" ></app-invoice-pdf>
 </div> -->

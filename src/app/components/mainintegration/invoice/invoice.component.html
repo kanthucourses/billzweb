@@ -302,7 +302,7 @@
                 </table>
             </div>
         </section>
-        <div class="col-12 d-flex">{{!invoiceForm.valid}} {{!isServiceValid()}} {{isUpdateBtnReadOnly}}
+        <div class="col-12 d-flex">
             <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
                 [attr.disabled]="!invoiceForm.valid || (!isReadOnly && !isServiceValid())  || isUpdateBtnReadOnly ? true : null"
                 (click)="saveOrEdit()">{{saveEdit}}</button>

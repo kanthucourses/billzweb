@@ -21,7 +21,7 @@ export class InvoicePdfComponent implements OnInit {
   organization : any
   edit_id: any;
   @ViewChild('invoice') invoiceElement!: ElementRef;
-
+   currentDate = new Date();
 
   constructor(private mainTransactionsService: MainTransactionsService,
     private mastersService: MastersService,
