@@ -1,0 +1,48 @@
+
+
+.filter-section{
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+	font-size: 13px;
+    font-family: sans-serif;
+}
+
+#btnFilter{
+   font-family: 'Arial', sans-serif; 
+   background-color: #1f7681;
+   border-color: #1f7681;
+}
+#btnClear{
+    font-family: 'Arial', sans-serif; 
+   background-color: #c01a0b; 
+   border-color: #d62522;
+}
+
+input:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #3292a6;
+    outline-width: 0;
+    font-weight: 400
+}
+
+//summary table
+.summary-table {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-family: sans-serif;
+  }
+  
+  .summary-table .table th{
+    font-family: sans-serif;
+	font-size: 13px;
+}
+
+.summary-table .table td{
+    font-family: sans-serif;
+	font-size: 13px;
+}
+  

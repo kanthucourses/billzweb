@@ -113,11 +113,9 @@ export class InvoiceComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-    // Call the method after view has been initialized
     this.isServiceValid();
   }
 
-  // Method to check if all service validations are valid for all invoice lines
   isServiceValid(): boolean {
     let isValid = true;
 
@@ -133,7 +131,7 @@ export class InvoiceComponent implements OnInit {
       // Check if any of the validations for the current invoice line are invalid
       if (!serviceSelectValidation.valid || !serviceCostValidation.valid || !quantityValidation.valid) {
         isValid = false;
-        return; // Exit loop if any invalid validation is found
+        return; 
       }
     });
 
@@ -216,6 +214,8 @@ export class InvoiceComponent implements OnInit {
         state: [null],
         country: [null],
         pincode: [null],
+        age: [null,Validators.required],
+        gender: [null],
       }),
       organizationInfo: this.fb.group({
         _id: [null],
@@ -473,6 +473,7 @@ export class InvoiceComponent implements OnInit {
 
   invoiceStatus : any = null;
   confirmInvoice() {
+    console.log(this.invoice)
     this.invoiceStatus = "Confirmed"
     this.updateInvoice();
   }
@@ -633,7 +634,9 @@ export class InvoiceComponent implements OnInit {
         city: invoice?.customerDetails?.city,
         state: invoice?.customerDetails?.state,
         country: invoice?.customerDetails?.country,
-        pincode: invoice?.customerDetails?.pincode
+        pincode: invoice?.customerDetails?.pincode,
+        age:invoice?.customerDetails?.age,
+        gender:invoice?.customerDetails?.gender
       },
     })
 

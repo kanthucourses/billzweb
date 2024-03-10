@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg nav-section">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/home"> 
         <img
@@ -17,7 +17,7 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Masters
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
+            <ul class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="/services">Services</a></li>
               <li><a class="dropdown-item" routerLink="/organization">Organization</a></li>
               <li><a class="dropdown-item" routerLink="/tax">Tax</a></li>
@@ -28,9 +28,27 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Main
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
+            <ul class="dropdown-menu ">
               <li><a class="dropdown-item" routerLink="/invoice">Invoice</a></li>
               <li><a class="dropdown-item" routerLink="/invoiceList">Invoice List</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Reports
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/invoice-summary">Invoice Summary</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dashboards
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/invoice-dashboard">Over All</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>

@@ -7,6 +7,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { InvoicePdfComponent } from './components/mainintegration/invoice-pdf/invoice-pdf.component';
 import { OrganizationComponent } from './components/masters/organization/organization.component';
 import { TaxMasterComponent } from './components/masters/tax-master/tax-master.component';
+import { InvoiceSummaryComponent } from './components/reports/invoice-summary/invoice-summary.component';
+import { InvoiceDashboardComponent } from './components/dashboards/invoice-dashboard/invoice-dashboard.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,7 @@ const routes: Routes = [
   {path:'invoiceList',component:InvoiceListComponent},
   {path:'invoice/edit/:id',component:InvoiceComponent},
   {path:'invoicePdf',component:InvoicePdfComponent},
-  {path:'invoicePdf/view/:id',component:InvoicePdfComponent},
+  {path:'invoicePdf/view/:id',component:InvoicePdfComponent}
 
 ];
 

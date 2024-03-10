@@ -73,4 +73,31 @@ organizationIDName : organizationIDName
     return this.httpService.restApiCall(httpRequestHandler);
   }
 
+  findInvoiceSummaryReport(inputData: any) {
+    const httpRequestHandler = new HttpRequestHandler();
+    httpRequestHandler.url = 'invoice/services/findInvoiceSummaryReport';
+    httpRequestHandler.contentType = this.APPLICATION_JSON;
+    httpRequestHandler.body = inputData;
+    httpRequestHandler.type = this.REST_TYPE_POST;
+    return this.httpService.restApiCall(httpRequestHandler);
+  }
+
+  findInvoicesRevenueByFilter(inputData: any) {
+    const httpRequestHandler = new HttpRequestHandler();
+    httpRequestHandler.url = 'invoice/services/findInvoicesRevenueByFilter';
+    httpRequestHandler.contentType = this.APPLICATION_JSON;
+    httpRequestHandler.body = inputData;
+    httpRequestHandler.type = this.REST_TYPE_POST;
+    return this.httpService.restApiCall(httpRequestHandler);
+  }
+
+  findServicesData(inputData: any) {
+    const httpRequestHandler = new HttpRequestHandler();
+    httpRequestHandler.url = 'invoice/services/findServicesData';
+    httpRequestHandler.contentType = this.APPLICATION_JSON;
+    httpRequestHandler.body = inputData;
+    httpRequestHandler.type = this.REST_TYPE_POST;
+    return this.httpService.restApiCall(httpRequestHandler);
+  }
+
 }

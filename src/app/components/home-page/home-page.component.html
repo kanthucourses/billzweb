@@ -1,15 +1,44 @@
 <div class="wrapper">
-  <nav class="navbar">
-    <form class="container justify-content-start">
-      <button type="button" routerLink="/services" class="btn btn-light me-2">Masters</button>
-      <button type="button" routerLink="/invoice" class="btn btn-light">Main</button>
-    </form>
-  </nav>
   <div class="content">
-    <!-- Your page content goes here -->
+    <div class="creative-content">
+      <!-- <img src="path/to/your/image.jpg" alt="Creative Image"> -->
+      <h2>Welcome to our Portal</h2>
+      <p>Start exploring our features to unleash the power of our platform!</p>
+    </div>
   </div>
 
-<div class="footer">
-  <app-footer></app-footer>
-</div>
+  <div class="menu-section">
+      <nav class="navbar">
+        <form class="container justify-content-start">
+          <div class="card">
+            <a routerLink="/services" class="card-body card-link">
+              <h5 class="card-title">Masters</h5>
+              <p class="card-text">Explore the Masters</p>
+            </a>
+          </div>
+          <div class="card">
+            <a routerLink="/invoice" class="card-body card-link">
+              <h5 class="card-title">Main</h5>
+              <p class="card-text">Go to Main</p>
+            </a>
+          </div>
+          <div class="card">
+            <a routerLink="/invoice-summary" class="card-body card-link">
+              <h5 class="card-title">Reports</h5>
+              <p class="card-text">View Reports</p>
+            </a>
+          </div>
+          <div class="card">
+            <a routerLink="/invoice-dashboard" class="card-body card-link">
+              <h5 class="card-title">Dashboards</h5>
+              <p class="card-text">Check Dashboards</p>
+            </a>
+          </div>      
+        </form>
+      </nav>
+  </div>
+
+  <div class="footer">
+    <app-footer></app-footer>
+  </div>
 </div>

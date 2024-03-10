@@ -1,0 +1,58 @@
+<div class="container mt-5" id="invoice-revenue-dashboard">
+    <section class="invoice-revenue-dashboard-section border rounded p-4 shadow-lg">
+        <div class="row">
+            <form [formGroup]="invoiceRevenueForm" class="form-group col-sm-8 flex-column d-flex">
+                <div class="form-group col-sm-3 flex-column d-flex mb-3">
+                    <label class="form-control-label px-3">Year</label>
+                    <input type="text" id="yearPicker" name="Year" placeholder="Select year" class="form-control"
+                        formControlName="year" bsDatepicker [bsConfig]="bsConfig" (bsValueChange)="onYearChange($event)"
+                        autocomplete="off">
+                </div>
+                <div> Monthly Sales  </div>
+                <div class="card">
+                    <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+                </div>
+            </form>
+            <!-- <div class="form-group col-sm-4 flex-column d-flex">
+
+            </div> -->
+        </div>
+    </section>
+
+    <section class="services-dashboard-section border rounded p-4 shadow-lg my-3">
+        <div class="row">
+            <form [formGroup]="invoiceServicesForm" class="col-sm-12">
+                <div class="row">
+                    <div class="form-group col-sm-3 flex-column d-flex">
+                        <label class="form-control-label px-3">Date From</label>
+                        <input type="text" id="invoiceDateFrom" name="invoiceDateFrom" placeholder="Date From"
+                            class="form-control" formControlName="invoiceDateFrom" bsDatepicker 
+                            [bsConfig]="datePickerConfig" autocomplete="off" (bsValueChange)="onYearChangeFetchServiceDate()">
+                    </div>
+                    <div class="form-group col-sm-3 flex-column d-flex">
+                        <label class="form-control-label px-3">Date To</label>
+                        <input type="text" id="invoiceDateTo" name="invoiceDateTo" placeholder="Date To"
+                            class="form-control" formControlName="invoiceDateTo" bsDatepicker
+                            [bsConfig]="datePickerConfig" autocomplete="off" (bsValueChange)="onYearChangeFetchServiceDate()">
+                    </div>
+                </div>
+            </form>
+            <div class="col-sm-6">
+                <div> Services Count</div>
+                <div class="card"> 
+                    <div class="service-qty-chart">
+                        <p-chart type="pie" [data]="serviceQtyData" [options]="serviceQtyOptions"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div> Services Sales  </div>
+                <div class="card"> 
+                    <div class="service-revenue-chart">
+                        <p-chart type="pie" [data]="serviceRevenueData" [options]="serviceRevenueOptions"></p-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

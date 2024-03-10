@@ -5,11 +5,6 @@
     font-family: sans-serif;
 }
 
-/* .header-section {
-    border-bottom: 1px solid #ccc;
-    background-color: lightgrey;
-} */
-
 .header-content {
     margin-left: 50px;
     padding-top: 30px;
@@ -24,12 +19,6 @@
     font-family: sans-serif;
 }
 
-/* body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-} */
-
 .blue-text {
     color: #00BCD4
 }
@@ -43,15 +32,13 @@ label {
 }
 
 input,
-textarea,
-button {
+textarea {
     padding: 8px 15px;
     border-radius: 5px !important;
     margin: 5px 0px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     font-size: 15px !important;
-    /* font-weight: 300 */
 }
 
 input:focus,
@@ -64,11 +51,61 @@ textarea:focus {
     font-weight: 400
 }
 
+
+.btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #3292a6;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 40px;
+}
+
+.btn-danger {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #cb2045;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
+    height: 40px;
+}
+
+.btn-success {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #2087cb;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 40px;
+}
+
+.btn-primary:hover {
+    background-color: #1f7681;
+}
+
+.btn-danger:hover {
+    background-color: #b10228;
+}
+
+.btn-danger:hover {
+    background-color: #03568e;
+}
+
 .btn-block {
-    /* text-transform: uppercase; */
     font-size: 15px !important;
-    /* font-weight: 400; */
-    /* height: 43px; */
     cursor: pointer
 }
 
@@ -81,6 +118,7 @@ button:focus {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     outline-width: 0;
+    outline: none;
 }
 
 .remove-button:hover {
@@ -89,36 +127,23 @@ button:focus {
     ;
 }
 
-/* #btnSave {
-    background-color: #008080;
-    color: white;
-} */
-
-table {
-    font-size: 14px;
-}
-
 a {
     color: black;
     text-decoration: none !important;
-    /* padding: 14px 25px; */
 }
 
 a:link {
     text-align: center;
 }
 
-a:hover {
-    //  background-color: rgb(20, 3, 134);
-    //  color: white
-}
-a { 
+a {
     cursor: pointer;
- }
+}
 
 .serviceSearch {
     padding: 15px;
 }
+
 .serviceSearch {
     width: 150px;
 }
@@ -127,7 +152,8 @@ a {
     padding-top: 15px;
     width: 150px;
 }
-.taxHeader{
+
+.taxHeader {
     width: 150px;
 }
 
@@ -139,31 +165,57 @@ a {
     opacity: 0.5;
     font-size: 15px;
 }
-.qty{
+
+.qty {
     width: 100px;
 }
 
-.custom-label{
+.custom-label {
     font-size: 14px;
-  }
-  th{
-    font-size: 14px;
-  }
-
-  a.disabled {
-    pointer-events: none; /* Disable mouse events */
-    color: #ccc; /* Change the color to indicate it's disabled */
 }
 
-// .tax-button svg {
-//     align-items: start;
-//     width: 16px; 
-//     height: 16px; 
-// }
 
-// #paymentMethod option:first-child {
-//     opacity: 0.2 !important;
-//   }
-//   ::ng-deep #paymentMethod option:first-child {
-//     opacity: 0.5 !important;
-//   }
+a.disabled {
+    pointer-events: none;
+    /* Disable mouse events */
+    color: #ccc;
+}
+
+//summary table
+table {
+    font-size: 15px;
+}
+
+th {
+    font-size: 14px;
+}
+
+.summary-table {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-table .table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.summary-table .table th,
+.summary-table .table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: center;
+}
+
+.summary-table .table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.summary-table .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Alternate row background color */
+}

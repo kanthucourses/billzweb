@@ -1,41 +1,95 @@
-button:hover {
-    background-color: #3292a6;
-    cursor: pointer;
-}
-button {
-    width: 100px;
-    height: 60px;
-}
-button {
-    background-color: #3292a6;
-    color: #FFFFFF;
-    padding: 10px;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-     margin:10px
+/* Card styles for navigation items */
+.card {
+  margin: 10px; /* Add margin between cards */
+  border-radius: 10px; /* Add rounded corners to cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to cards */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Add smooth transition effect */
+  background-color: white;
+  color: #3292a6;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
+/* Hover effect for navigation items */
+.card:hover {
+  //transform: translateY(-5px); /* Move the card up slightly on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase the shadow intensity */
+  background-color: #3292a6; /* Change background color on hover */
+  color: white;
+}
+
+/* Card link styles */
+.card-link {
+  display: block;
+  text-decoration: none; /* Remove underline from card links */
+  color: inherit; /* Inherit text color from parent */
+}
+
+
+/* Primary button styles */
+.btn-primary {
+  background-color: #3292a6;
+  color: #FFFFFF;
+  padding: 10px 20px; /* Adjust padding for better appearance */
+  border-radius: 10px;
+}
+
+/* Navbar styles */
+// .navbar {
+//   background-color: #f0f0f0; /* Light gray background */
+//   padding: 10px; /* Add padding for spacing */
+//   border-radius: 10px; /* Add rounded corners */
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+//   margin-bottom: 20px; /* Add spacing between navbar and content */
   
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    // min-height: 100%;
-    height: 100vh;
-  }
-  
-  .content {
-    flex: 1;
-    overflow-y: auto;
-  }
-  
-  .footer {
-    margin-top: auto;
-  }
-  
-  
+// }
+
+/* Creative content styles */
+.creative-content {
+  text-align: center;
+}
+
+.creative-content h2 {
+  font-size: 24px;
+  color: #3292a6;
+  margin-bottom: 10px;
+}
+
+.creative-content p {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Wrapper styles */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the wrapper takes up the full height of the viewport */
+  //width: 100%;
+}
+.container{
+  width: 100%;
+
+}
+.menu-section {
+  margin-top: 20px; /* Add margin to separate container from content */
+  margin-bottom: 10px;
+  margin-left: 15px;
+  margin-right: 15px; 
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);  /* Add a subtle shadow */
+  background-color: #ffffffe0; 
+  border-radius: 10px;
+  //width: 100%;
+}
+
+
+/* Footer styles */
+.footer {
+  position: relative; /* Relative positioning for the footer */
+  width: 100%; /* Ensure the footer spans the full width */
+  //background-color: #f0f0f0; /* Light gray background */
+  padding: 10px; /* Add padding for spacing */
+  //border-radius: 10px; /* Add rounded corners */
+}
+

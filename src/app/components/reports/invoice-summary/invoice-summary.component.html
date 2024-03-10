@@ -1,0 +1,84 @@
+<div class="container mt-5" id="invoice-summary">
+  <section class="filter-section border rounded p-4 shadow-lg">
+    <form [formGroup]="invoiceSummaryForm">
+    <div class="row">
+        <div class="form-group col-sm-3 flex-column d-flex">
+            <label class="form-control-label px-3">Date From</label>
+            <input type="text" id="invoiceDateFrom" name="invoiceDateFrom" placeholder="Date From" class="form-control"
+            formControlName="invoiceDateFrom"  bsDatepicker  [bsConfig]="datePickerConfig" 
+            autocomplete="off">
+        </div>
+        <div class="form-group col-sm-3 flex-column d-flex">
+            <label class="form-control-label px-3">Date To</label>
+            <input type="text" id="invoiceDateTo" name="invoiceDateTo" placeholder="Date To" class="form-control"
+            formControlName="invoiceDateTo" bsDatepicker  [bsConfig]="datePickerConfig">
+        </div>
+        <div class="form-group col-sm-3 flex-column d-flex">
+            <label class="form-control-label px-3">Age From</label>
+            <input type="number" id="agefrom" name="agefrom" placeholder="Age From" class="form-control"
+            formControlName="ageFrom">
+        </div>
+        <div class="form-group col-sm-3 flex-column d-flex">
+            <label class="form-control-label px-3">Age To</label>
+            <input type="number" id="ageto" name="ageto" placeholder="Age To" class="form-control"
+            formControlName="ageTo">
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 d-flex">
+            <button id="btnFilter" type="button" class="btn btn-primary btn-block ms-auto" (click)="findInvoiceSummaryReport()">Filter</button>
+            <button id="btnClear" type="button" class="btn btn-primary btn-block ms-3" (click)="clear()">Clear</button>
+        </div>
+    </div>
+    </form>
+</section>
+
+
+<section class="table-section">
+  <div class="container summary-table">
+    <p-table class="table" [value]="invoices" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [responsive]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Invoice ID</th>
+          <th>Customer Name</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Total Gross Amount</th>
+          <th>Total Tax Amount</th>
+          <th>Total Discount Amount</th>
+          <th>Total Net Amount</th>
+          <th>Service ID Name</th>
+          <th>Quantity</th>
+          <th>Service Cost</th>
+          <th>Gross Amount</th>
+          <th>Tax Amount</th>
+          <th>Discount Amount</th>
+          <th>Net Amount</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-invoice let-i="rowIndex">
+        <ng-container *ngFor="let line of invoice.invoiceLines; let j=index">
+          <tr>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.invoiceID }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.customerDetails.customerName }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.customerDetails.gender }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.customerDetails.age }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.totalGrossAmount }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.totalTaxAmount }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.totalDiscountAmount }}</td>
+            <td *ngIf="j === 0" [attr.rowspan]="invoice.invoiceLines.length">{{ invoice.totalNetAmount }}</td>
+            <td>{{ line.serviceName }}</td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.serviceCost }}</td>
+            <td>{{ line.grossAmount }}</td>
+            <td>{{ line.taxAmount }}</td>
+            <td>{{ line.discountAmount }}</td>
+            <td>{{ line.netAmount }}</td>
+          </tr>
+        </ng-container>
+      </ng-template>
+    </p-table>
+  </div>
+</section>
+
+</div>

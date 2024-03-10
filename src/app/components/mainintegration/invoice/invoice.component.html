@@ -25,6 +25,32 @@
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
+                                <label for="customerName" class="col-sm-2 col-form-label custom-label">Age
+                                    <span class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="number" [readonly]="isReadOnly" formControlName="age"
+                                        class="form-control" id="age" placeholder="age">
+                                    <div
+                                        *ngIf="invoiceForm.get('customerDetails').get('age').hasError('required') 
+                                        && (invoiceForm.get('customerDetails').get('age').dirty || invoiceForm.get('customerDetails').get('age').touched)">
+                                        <span class="text-danger">Age is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="gender" class="col-sm-2 col-form-label custom-label">Gender</label>
+                                <div class="col-sm-10">
+                                    <select id="gender" class="form-select"
+                                     formControlName="gender"
+                                    placeholder="payment method">
+                                    <option value=null>select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row" formGroupName="customerDetails">
                                 <label for="emailID" class="col-sm-2 col-form-label custom-label">Email ID</label>
                                 <div class="col-sm-10">
                                     <input type="text" [readonly]="isReadOnly" formControlName="emailID"
@@ -44,17 +70,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row" formGroupName="customerDetails">
-                                <label for="alternativePhoneNumber"
-                                    class="col-sm-2 col-form-label custom-label">Alternative Phone
-                                    No</label>
-                                <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="alternativePhoneNumber"
-                                        class="form-control" id="alternativePhoneNumber"
-                                        placeholder="alternative phone number">
-                                </div>
-                            </div>
-
+                           
                         </div>
                     </div>
 
@@ -83,23 +99,34 @@
                                 </div>
                             </div>
                             <div class="form-group row" formGroupName="customerDetails">
-                                <label for="country" class="col-sm-2 col-form-label custom-label">Country</label>
-                                <div class="col-sm-10">
-                                    <input type="text" [readonly]="isReadOnly" formControlName="country"
-                                        class="form-control" id="country" placeholder="country">
-                                </div>
-                            </div>
-                            <div class="form-group row" formGroupName="customerDetails">
                                 <label for="pincode" class="col-sm-2 col-form-label custom-label">Pincode</label>
                                 <div class="col-sm-10">
                                     <input type="text" [readonly]="isReadOnly" formControlName="pincode"
                                         class="form-control" id="pincode" placeholder="pincode">
                                 </div>
                             </div>
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="country" class="col-sm-2 col-form-label custom-label">Country</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="country"
+                                        class="form-control" id="country" placeholder="country">
+                                </div>
+                            </div>
+                           
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-3">
                         <div class="row mb-3">
+                            <div class="form-group row" formGroupName="customerDetails">
+                                <label for="alternativePhoneNumber"
+                                    class="col-sm-2 col-form-label custom-label">Phone No(alt)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" [readonly]="isReadOnly" formControlName="alternativePhoneNumber"
+                                        class="form-control" id="alternativePhoneNumber"
+                                        placeholder="alternative phone number">
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="invoiceDate" class="col-sm-2 col-form-label custom-label">Invoice
                                     Date</label>
@@ -208,7 +235,7 @@
         </div>
 
         <section id="inlineTable">
-            <div class="pt-2">
+            <div class="pt-2 summary-table" >
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -302,13 +329,13 @@
                 </table>
             </div>
         </section>
-        <div class="col-12 d-flex">
+        <div class="col-12 d-flex my-3">
             <button id="btnSave" type="button" class="btn btn-primary btn-block ms-auto"
                 [attr.disabled]="!invoiceForm.valid || (!isReadOnly && !isServiceValid())  || isUpdateBtnReadOnly ? true : null"
                 (click)="saveOrEdit()">{{saveEdit}}</button>
                 <button id="btnConfirm" type="button" class="btn btn-success btn-block ms-2"
                 [attr.disabled]="!invoiceForm.valid || (!isServiceValid()) || isUpdateBtnReadOnly ? true : null"
-               (click)="confirmInvoice()">Confirm</button>
+               (click)="confirmInvoice()">confirm</button>
             <button id="btnClear" type="button" class="btn btn-danger btn-block ms-3"
                 [attr.disabled]="isReadOnly ? true : null" (click)="clear()">clear</button>
         </div>
@@ -318,12 +345,14 @@
 <!-- summarytable -->
 <div class="container mt-5">
     <section class="table-section">
-        <div class="container">
+        <div class="container summary-table">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="col">Invoice ID</th>
                         <th class="col">Customer Name</th>
+                        <th class="col">Gender</th>
+                        <th class="col">Age</th>
                         <th class="col">Phone Number</th>
                         <th class="col">Email ID</th>
                         <th class="col">Address</th>
@@ -337,6 +366,8 @@
                     <tr *ngFor="let invoice of invoices; let i= index ">
                         <td>{{invoice?.invoiceID}}</td>
                         <td>{{invoice.customerDetails?.customerName}}</td>
+                        <td>{{invoice.customerDetails?.gender}}</td>
+                        <td>{{invoice.customerDetails?.age}}</td>
                         <td>{{invoice.customerDetails?.phoneNumber}}</td>
                         <td>{{invoice.customerDetails?.emailID}}</td>
                         <td>{{invoice.customerDetails?.address}}</td>
@@ -360,7 +391,7 @@
 
 <div class="container mt-2">
     <section class="table-section">
-        <div class="container">
+        <div class="container summary-table">
             <table class="table table-bordered">
                 <thead>
                     <tr>

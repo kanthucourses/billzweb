@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { TableModule } from 'primeng/table'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +26,14 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DataTablesModule } from 'angular-datatables';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { InvoiceSummaryComponent } from './components/reports/invoice-summary/invoice-summary.component';
+import { ImageModule } from 'primeng/image'; 
+import { ChartModule } from 'primeng/chart';
+import { InvoiceDashboardComponent } from './components/dashboards/invoice-dashboard/invoice-dashboard.component';
+import { ReportsModule } from './modules/reports-module/reports-module';
+import { SharedModule } from './modules/shared/shared.module';
+import { ReportsRoutingModule } from './modules/reports-routing/reports-routing.module';
+import { DashboardsModule } from './modules/dashboards/dashboards.module';
 
 @NgModule({
   declarations: [
@@ -42,12 +50,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     TaxMasterComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    SharedModule,
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule,
     ToastrModule.forRoot(
       {
@@ -58,9 +62,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSmartModalModule.forRoot(),
     NgSelectModule,
     NgMultiSelectDropDownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    DataTablesModule,
-    NgxSpinnerModule
+    ReportsModule,
+    DashboardsModule
   ],
   providers: [DatePipe,
     { provide: LocationStrategy, useClass: HashLocationStrategy }

@@ -8,7 +8,9 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
 
-
+@import 'primeng/resources/themes/saga-blue/theme.css';
+@import 'primeng/resources/primeng.min.css';
+@import 'primeicons/primeicons.css';
 
 
 .form-group input::placeholder {
@@ -82,8 +84,14 @@ td input::placeholder {
     float: right !important;
     text-align: right !important;
     margin-bottom: 10px !important;
+ 
 }
-
+.dataTables_paginate, .paging_full_numbers{
+    font-size: 14px !important;
+}
+.dataTables_info{
+    font-size: 14px !important;
+}
 //toastr
 .toast-center {
     top: 50%;

@@ -2,17 +2,6 @@
     font-family: sans-serif;
 }
 
-/* ::-webkit-input-placeholder {
-    font-size: 15px;
-} */
-
-
-/* .header-section {
-    border-bottom: 1px solid #ccc;
-    background-color: lightgrey;
-} */
-
-
 .header-content {
     margin-left: 50px;
     padding-top: 30px;
@@ -21,19 +10,11 @@
     text-transform: uppercase;
 }
 
-.header-value{
+.header-value {
     letter-spacing: 3px;
     font-size: 15px;
     font-family: sans-serif;
 }
-
-
-
-/* body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-} */
 
 .blue-text {
     color: #00BCD4
@@ -43,20 +24,8 @@
     margin-bottom: 0
 }
 
-label{
+label {
     font-size: 15px;
-}
-
-input,
-textarea,
-button {
-    padding: 8px 15px;
-    border-radius: 5px !important;
-    margin: 5px 0px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    font-size: 15px !important;
-    /* font-weight: 300 */
 }
 
 input:focus,
@@ -69,11 +38,53 @@ textarea:focus {
     font-weight: 400
 }
 
-.btn-block {
-    /* text-transform: uppercase; */
+input,
+textarea {
+    padding: 8px 15px;
+    border-radius: 5px !important;
+    margin: 5px 0px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
     font-size: 15px !important;
-    /* font-weight: 400; */
-    /* height: 43px; */
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #3292a6;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 40px;
+}
+
+.btn-danger {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #cb2045;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
+    height: 40px;
+}
+
+.btn-primary:hover {
+    background-color: #1f7681;
+}
+
+.btn-danger:hover {
+    background-color: #b10228;
+}
+
+.btn-block {
+    font-size: 15px !important;
     cursor: pointer
 }
 
@@ -86,84 +97,72 @@ button:focus {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     outline-width: 0;
+    outline: none;
+    /* Remove outline on focus */
+
 }
 
-/* #btnSave {
-    background-color: #008080;
-    color: white;
-} */
-
-table{
+table {
     font-size: 15px;
 }
 
 a {
     color: black;
     text-decoration: none !important;
-    /* padding: 14px 25px; */
 }
 
 a:link {
     text-align: center;
 }
-a { 
+
+a {
     cursor: pointer;
- }
-a:hover {
-    //  background-color: rgb(20, 3, 134);
-    //  color: white
-  }
+}
 
-  .taxSearch{
+.taxSearch {
     width: 555px !important;
-  }
-  
-  .custom-label{
+}
+
+.custom-label {
     font-size: 14px;
-  }
-  th{
+}
+
+th {
     font-size: 14px;
-  }
-
-  .summary-table {
-	background-color: #ffffff;
-	padding: 25px;
-	font-size: 14px;
-	border-radius: 10px;
-	margin-top: 10px;
-
-	//box-shadow: 0px 0px 6px 1px #ccc;
 }
 
-
-.summary-table .table td, .table th {
-	border-right: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
-	border-top: 1px solid #dee2e6;;
-	vertical-align: middle;
-	font-size: 14px;
-}
-.summary-table .table th{
-	font-size: 14px;
-}
-.summary-table .table td span.btn i {
-	padding: 5px;
-	//cursor: pointer;
-}
-.summary-table .table td span.btn i:hover {
-	background: #049be3;
-}
-.summary-table .table td:first-child, .table th:first-child {
-	border-left: 1px solid #dee2e6;
-}
-.summary-table .table tbody {
-	border-bottom: 1px solid #dee2e6;
-	text-align: center;
-	font-size: 14px;
+.summary-table {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
 }
 
-.summary-table table.dataTable {
-	border-collapse: collapse !important;
+.summary-table .table {
+    border-collapse: collapse;
+    /* Collapse border spacing */
+    width: 100%;
+}
+
+.summary-table .table th,
+.summary-table .table td {
+    border: 1px solid #dee2e6;
+    /* Add border to table cells */
+    padding: 8px;
+    text-align: center;
+}
+
+.summary-table .table th {
+    background-color: #f0f0f0;
+    /* Light gray background for table header */
+    font-weight: bold;
+}
+
+.summary-table .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Alternate row background color */
 }
 
 
@@ -174,4 +173,3 @@ a:hover {
 //     text-align: right !important;
 //     margin-bottom: 30px !important;
 // }
-  

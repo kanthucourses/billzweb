@@ -1,5 +1,6 @@
 <div>
-        <button id="createInvoiceButton" type="button" class="btn btn-info btn-block" routerLink="/invoice">Create Invoice</button>
+    <button id="createInvoiceButton" type="button" class="btn btn-info btn-block" routerLink="/invoice">Create
+        Invoice</button>
 </div>
 
 <!-- summarytable -->
@@ -7,11 +8,13 @@
 <div class="container mt-5" id="invoice" #invoice>
     <section class="table-section">
         <div class="container summary-table">
-            <table  class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                 <thead>
                     <tr>
                         <th class="col-1">Invoice ID</th>
                         <th class="col-1">Customer Name</th>
+                        <th class="col-1">Gender</th>
+                        <th class="col-1">Age</th>
                         <th class="col-1">Phone Number</th>
                         <th class="col-1">Email ID</th>
                         <th class="col-2">Address</th>
@@ -26,6 +29,8 @@
                     <tr *ngFor="let invoice of invoices; let i= index ">
                         <td>{{invoice?.invoiceID}}</td>
                         <td>{{invoice.customerDetails?.customerName}}</td>
+                        <td>{{invoice.customerDetails?.gender}}</td>
+                        <td>{{invoice.customerDetails?.age}}</td>
                         <td>{{invoice.customerDetails?.phoneNumber}}</td>
                         <td>{{invoice.customerDetails?.emailID}}</td>
                         <td>{{invoice.customerDetails?.address}}</td>
@@ -36,11 +41,13 @@
                             <span>
                                 <a (click)="editInvoice(invoice._id)">
                                     <i class="bi bi-pencil-square me-4"></i>
-                                </a>                       
-                                <a [class.disabled]="invoice.invoiceStatus === 'Confirmed'"><i class="bi bi-trash" (click)="deleteInvoice(invoice,null)"></i></a>
+                                </a>
+                                <a [class.disabled]="invoice.invoiceStatus === 'Confirmed'"><i class="bi bi-trash"
+                                        (click)="deleteInvoice(invoice,null)"></i></a>
                             </span>
                         </td>
-                        <td><a (click)="invoicePdfView(invoice._id)"><i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i>PDF</a></td>
+                        <td><a (click)="invoicePdfView(invoice._id)"><i class="bi bi-file-earmark-arrow-down"
+                                    aria-hidden="true"></i>PDF</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -52,7 +59,7 @@
 <div class="container mt-2">
     <section class="table-section">
         <div class="container summary-table">
-            <table  class="table" datatable [dtOptions]="dtOptions2" [dtTrigger]="dtTrigger2">
+            <table class="table" datatable [dtOptions]="dtOptions2" [dtTrigger]="dtTrigger2">
                 <thead>
                     <tr>
                         <th class="col">Invoice ID</th>
@@ -60,7 +67,10 @@
                         <th class="col">Service IDName</th>
                         <th class="col">Service Cost</th>
                         <th class="col">Quantity</th>
-                        <th class="col">Amount</th>
+                        <th class="col">Gross Amount</th>
+                        <th class="col">Tax Amount</th>
+                        <th class="col">Discount Amount</th>
+                        <th class="col">Net Amount</th>
                         <th class="col">Action</th>
                     </tr>
                 </thead>
@@ -71,12 +81,14 @@
                         <td>{{invoiceLine?.serviceIDName}}</td>
                         <td>{{invoiceLine?.serviceCost}}</td>
                         <td>{{invoiceLine?.quantity}}</td>
-                        <td>{{invoiceLine?.amount}}</td>
+                        <td>{{invoiceLine.grossAmount }}</td>
+                        <td>{{invoiceLine.taxAmount }}</td>
+                        <td>{{invoiceLine.discountAmount }}</td>
+                        <td>{{invoiceLine.netAmount }}</td>
                         <td>
                             <span>
-                                <a><i class="bi bi-pencil-square me-4"></i></a>
-                                <a><i class="bi bi-trash ps-4"
-                                    (click)="deleteInvoice(null,invoiceLine)"></i></a>
+                                <a><i class="bi bi-pencil-square me-3"></i></a>
+                                <a><i class="bi bi-trash ps-4" (click)="deleteInvoice(null,invoiceLine)"></i></a>
                             </span>
                         </td>
                     </tr>
