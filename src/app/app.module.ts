@@ -34,6 +34,8 @@ import { ReportsModule } from './modules/reports-module/reports-module';
 import { SharedModule } from './modules/shared/shared.module';
 import { ReportsRoutingModule } from './modules/reports-routing/reports-routing.module';
 import { DashboardsModule } from './modules/dashboards/dashboards.module';
+import { LoginComponent } from './components/login/login/login.component';
+import { WebSocketExComponent } from './components/masters/web-socket-ex/web-socket-ex.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { DashboardsModule } from './modules/dashboards/dashboards.module';
     FooterComponent,
     InvoicePdfComponent,
     OrganizationComponent,
-    TaxMasterComponent
+    TaxMasterComponent,
+    LoginComponent,
+    WebSocketExComponent
   ],
   imports: [
     SharedModule,
@@ -63,10 +67,10 @@ import { DashboardsModule } from './modules/dashboards/dashboards.module';
     NgSelectModule,
     NgMultiSelectDropDownModule.forRoot(),
     ReportsModule,
-    DashboardsModule
+    DashboardsModule,
   ],
   providers: [DatePipe,
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
 ],
   bootstrap: [AppComponent]
 })

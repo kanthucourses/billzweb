@@ -23,9 +23,10 @@ export class HttpService {
   baseURL: string = environment.baseUrl;
 
 
-  restApiCall(httpRequestHandler: HttpRequestHandler): Observable<any> {
-    this.spinnerService.showSpinner();
-    
+  restApiCall(httpRequestHandler: HttpRequestHandler,isShowSpinner:any): Observable<any> {
+    if(isShowSpinner && isShowSpinner==='true'){
+      this.spinnerService.showSpinner();
+    }
     return this.restService(httpRequestHandler).pipe(
         catchError(error => {
             throw error;

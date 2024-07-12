@@ -25,7 +25,8 @@ export class MastersService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   updateServiceMaster(inputData: any) {
@@ -34,7 +35,8 @@ export class MastersService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_PUT;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   fetchAllServiceMasters(inputData:any) {
@@ -42,7 +44,8 @@ export class MastersService {
     httpRequestHandler.url = 'service/services/findAllServiceMasters';
     httpRequestHandler.type = this.REST_TYPE_POST;
     httpRequestHandler.body = inputData;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   deleteServiceMaster(inputData: any) {
@@ -55,7 +58,8 @@ export class MastersService {
 
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_DELETE;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   saveOrganization(inputData: any) {
@@ -64,7 +68,8 @@ export class MastersService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   updateOrganization(inputData: any) {
@@ -73,7 +78,8 @@ export class MastersService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_PUT;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   fetchAllOrganizations() {
@@ -81,7 +87,8 @@ export class MastersService {
     httpRequestHandler.url = 'organization/services/findAllOrganizations';
     httpRequestHandler.type = this.REST_TYPE_GET;
     httpRequestHandler.body = {};
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   deleteOrganization(inputData: any) {
@@ -94,7 +101,8 @@ export class MastersService {
 
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_DELETE;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   findOrganizationById(inputData: any) {
@@ -107,7 +115,8 @@ export class MastersService {
 
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_GET;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   saveTaxMaster(inputData: any) {
@@ -116,7 +125,8 @@ export class MastersService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   updateTaxMaster(inputData: any) {
@@ -125,7 +135,8 @@ export class MastersService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_PUT;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   fetchAllTaxMasters(inputData: any) {
@@ -134,7 +145,8 @@ export class MastersService {
     httpRequestHandler.type = this.REST_TYPE_GET;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   deleteTaxMaster(inputData: any) {
@@ -147,7 +159,8 @@ export class MastersService {
 
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_DELETE;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   uploadFile(file: any) {
@@ -158,7 +171,8 @@ export class MastersService {
     formData.append('file', file);
     httpRequestHandler.body = formData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   viewFile(inputData: any) {
@@ -169,7 +183,8 @@ export class MastersService {
     console.log(req)
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_GET;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   deleteFile(inputData: any) {
@@ -181,7 +196,8 @@ export class MastersService {
     console.log(req)
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_DELETE;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
 }

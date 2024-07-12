@@ -9,6 +9,9 @@ import { catchError } from 'rxjs/operators';
 import { MastersService } from 'src/app/services/integration-services/masters.service';
 import { SharedDataServiceService } from 'src/app/services/shared/shared-data-service.service';
 import { SpinnerService } from 'src/app/shared/common/spinner.service';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { Observable } from 'rxjs';
+import { ServiceMasterWebSocketService } from 'src/app/services/integration-services/service-master-web-socket.service';
 
 @Component({
   selector: 'app-service-master',
@@ -32,12 +35,16 @@ export class ServiceMasterComponent implements OnInit, OnDestroy, AfterViewInit 
     itemsShowLimit: 6,
     allowSearchFilter: true
   };
+
   constructor(private mastersService: MastersService,
     private toastr: ToastrService,
     private ngxSmartModalService: NgxSmartModalService,
-    private fb: FormBuilder, private sharedDataService: SharedDataServiceService) {
-    this.dropdownSettings
+    private fb: FormBuilder, private sharedDataService: SharedDataServiceService,
+    private websocketService: ServiceMasterWebSocketService) {
+    this.dropdownSettings;
+
   }
+
   organizationIDName: any;
   organizationInfo: any;
   serviceMasterFilter = {
@@ -71,6 +78,13 @@ export class ServiceMasterComponent implements OnInit, OnDestroy, AfterViewInit 
     });
 
     this.createServiceMasterForm();
+    this.websocketService.getServiceMasters().subscribe((data: any[]) => {
+      // Log received data to the console
+      console.log('Received data from WebSocket:', data);
+      
+      // Update local data
+      this.serviceMasters = data;
+    });
    // this.spinnerService.showSpinner();
   }
 
@@ -315,5 +329,7 @@ export class ServiceMasterComponent implements OnInit, OnDestroy, AfterViewInit 
     console.log(matchedTaxMasterInfos)
     return matchedTaxMasterInfos;
   }
+
+
 
 }

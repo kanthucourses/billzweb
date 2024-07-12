@@ -21,7 +21,7 @@
               <li><a class="dropdown-item" routerLink="/services">Services</a></li>
               <li><a class="dropdown-item" routerLink="/organization">Organization</a></li>
               <li><a class="dropdown-item" routerLink="/tax">Tax</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" >Something else here</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -31,7 +31,7 @@
             <ul class="dropdown-menu ">
               <li><a class="dropdown-item" routerLink="/invoice">Invoice</a></li>
               <li><a class="dropdown-item" routerLink="/invoiceList">Invoice List</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" >Something else here</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -40,7 +40,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="/invoice-summary">Invoice Summary</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" >Something else here</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -49,15 +49,26 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="/invoice-dashboard">Over All</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" >Something else here</a></li>
             </ul>
           </li>
         </ul>
       </div>
-      <div>
+      <div class="orgDropdown">
         <select class="form-select" aria-label="organization select" [(ngModel)]="selectedOrganization" (change)="onDropdownChange()">
           <option *ngFor="let org of organizations; let i=index" [value]="org.organizationIDName">{{org.organizationIDName}}</option>
         </select>
+      </div>
+      <div class="logout ms-4">
+        <div class="nav-item dropdown logout-dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-lines-fill"></i>
+          </a>
+          <ul class="dropdown-menu logout-dropdown-menu">
+            <li><a class="dropdown-item logout-dropdown-item" >admin</a></li>
+            <li><a class="dropdown-item logout-dropdown-item" (click) ="logout()"><span><i class="bi bi-box-arrow-right"></i></span> Logout</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>

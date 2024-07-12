@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { MastersService } from 'src/app/services/integration-services/masters.service';
 import { SharedDataServiceService } from 'src/app/services/shared/shared-data-service.service';
 
@@ -12,7 +14,9 @@ export class HeaderComponent implements OnInit {
   selectedOrganization : any;
 
   constructor(private mastersService: MastersService,
-    private sharedDataService: SharedDataServiceService) {
+    private sharedDataService: SharedDataServiceService,
+    private authService : AuthService,
+    private router: Router) {
 
   }
 
@@ -65,6 +69,11 @@ export class HeaderComponent implements OnInit {
         this.organizations = [];
       }
     )
+  }
+
+  logout(){
+    const logout= this.authService.logout();
+    this.router.navigate(['login']);
   }
 
 }

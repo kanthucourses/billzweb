@@ -23,7 +23,8 @@ export class MainTransactionsService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   updateInvoice(inputData: any) {
@@ -32,7 +33,8 @@ export class MainTransactionsService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_PUT;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = true;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   findAllInvoices(inputData: any) {
@@ -41,7 +43,8 @@ export class MainTransactionsService {
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   deleteInvoice(_id: any,lineID:any,organizationIDName:any) {
@@ -57,7 +60,8 @@ organizationIDName : organizationIDName
 
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_DELETE;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   findInvoiceById(inputData: any) {
@@ -70,7 +74,8 @@ organizationIDName : organizationIDName
 
     httpRequestHandler.body = req;
     httpRequestHandler.type = this.REST_TYPE_GET;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   findInvoiceSummaryReport(inputData: any) {
@@ -79,7 +84,8 @@ organizationIDName : organizationIDName
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   findInvoicesRevenueByFilter(inputData: any) {
@@ -88,7 +94,8 @@ organizationIDName : organizationIDName
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
   findServicesData(inputData: any) {
@@ -97,7 +104,8 @@ organizationIDName : organizationIDName
     httpRequestHandler.contentType = this.APPLICATION_JSON;
     httpRequestHandler.body = inputData;
     httpRequestHandler.type = this.REST_TYPE_POST;
-    return this.httpService.restApiCall(httpRequestHandler);
+    const isShowSpinner = false;
+    return this.httpService.restApiCall(httpRequestHandler,isShowSpinner);
   }
 
 }

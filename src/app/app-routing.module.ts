@@ -9,22 +9,27 @@ import { OrganizationComponent } from './components/masters/organization/organiz
 import { TaxMasterComponent } from './components/masters/tax-master/tax-master.component';
 import { InvoiceSummaryComponent } from './components/reports/invoice-summary/invoice-summary.component';
 import { InvoiceDashboardComponent } from './components/dashboards/invoice-dashboard/invoice-dashboard.component';
+import { LoginComponent } from './components/login/login/login.component';
+import { AuthGuard } from './auth/auth.guard';
+import { WebSocketExComponent } from './components/masters/web-socket-ex/web-socket-ex.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
-  {path:'home',component:HomePageComponent},
-  {path:'services',component:ServiceMasterComponent},
-  {path:'organization',component:OrganizationComponent},
-  {path:'tax',component:TaxMasterComponent},
-  {path:'invoice',component:InvoiceComponent},
-  {path:'invoiceList',component:InvoiceListComponent},
-  {path:'invoice/edit/:id',component:InvoiceComponent},
-  {path:'invoicePdf',component:InvoicePdfComponent},
-  {path:'invoicePdf/view/:id',component:InvoicePdfComponent}
+  {path:'websocket',component:WebSocketExComponent},
+  {path:'login',component:LoginComponent},
+  {path:'home',component:HomePageComponent,canActivate: [AuthGuard]},
+  {path:'services',component:ServiceMasterComponent,canActivate: [AuthGuard]},
+  {path:'organization',component:OrganizationComponent,canActivate: [AuthGuard]},
+  {path:'tax',component:TaxMasterComponent,canActivate: [AuthGuard]},
+  {path:'invoice',component:InvoiceComponent,canActivate: [AuthGuard]},
+  {path:'invoiceList',component:InvoiceListComponent,canActivate: [AuthGuard]},
+  {path:'invoice/edit/:id',component:InvoiceComponent,canActivate: [AuthGuard]},
+  {path:'invoicePdf',component:InvoicePdfComponent,canActivate: [AuthGuard]},
+  {path:'invoicePdf/view/:id',component:InvoicePdfComponent,canActivate: [AuthGuard]}
 
 ];
 
